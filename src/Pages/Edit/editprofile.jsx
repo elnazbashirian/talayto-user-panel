@@ -47,7 +47,7 @@ function Editprofile(props) {
             },
         };
         axios
-            .put('http://91.107.160.88:3001/v1/userInfo', userData, config)
+            .put('/userInfo', userData, config)
             .then((response) => {
                 console.log('Profile edit successful:', response);
             })

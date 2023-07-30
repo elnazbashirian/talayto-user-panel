@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.line {
+    border-bottom: 2px #333 solid;
+}
+
+body {
+    background-color: black;
+    font-family: "B Nazanin";
+    font-size: 1.2rem;
+    color: white;
+}
+
+.top-card, .below-card {
+    width: 60%;
+    direction: rtl;
+    background-color: #1b1a1a;
+    border-radius: 0.428rem;
+    margin: 1.2em auto;
+
+}
+
+.card-body-buy {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1.6em 1em;
+}
+
+.below-header {
+    padding: .6em 1em;
+}
+
+.cash-input, .gold-input {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    margin: 1em auto;
+}
+
+.wage {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+}
+
+.below-body input {
+    background-color: #1b1a1a;
+    border: 1px solid #D8D6DE;
+    border-radius: .428em;
+    padding: .5em 3em;
+}
+
+input[type=checkbox] {
+    margin-left: .4em;
+}
+
+.below-footer button {
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #917c2a;
+    color: #1b1a1a;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    padding: .4em;
+    line-height: 1;
+    border-radius: 0.358rem;
+}
+
+.below-footer {
+    padding: .6em 1em;
+    display: flex;
+    justify-content: space-evenly;
+    width: 31%;
+}
+
+.bubble-message {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+@media (max-width: 1432px) {
+    .cash-input, .gold-input {
+        flex-direction: column;
+    }
+
+    .top-card, .below-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 805px) {
+    .card-body-buy {
+        flex-direction: column;
+    }
+
+    .card-box {
+        margin-bottom: .7em;
+    }
+}
+
+@media (max-width: 500px) {
+    .cash-input, .gold-input {
+        flex-direction: column;
+        width: 94%;
+    }
+
+    .below-body input {
+        padding: .5em;
+    }
+
+    .check-box span {
+        margin-right: .4em;
+    }
+
+    .check-box {
+        margin-bottom: .4em;
+    }
+
+    .buy-footer {
+        justify-content: space-between;
+        width: 75%;
+    }
+
+    .sell-footer {
+        justify-content: space-between;
+        width: 79%;
+    }
+}

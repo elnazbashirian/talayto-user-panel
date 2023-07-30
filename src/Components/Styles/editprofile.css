@@ -1,0 +1,153 @@
+.line {
+    border-bottom: 2px #333 solid;
+}
+
+.edit-container {
+    display: flex;
+    direction: rtl;
+}
+
+.hidden {
+    display: none;
+}
+
+.edit-pro-container {
+    background-color: #1b1a1a;
+    width: 70%;
+    margin: 0em auto;
+    margin-top: 2em;
+}
+
+.edit-items {
+    margin-top: 2em;
+    width: 25%;
+    background-color: #1b1a1a;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    border-radius: .4em;
+    max-height: 155px;
+}
+
+.edit-input {
+    display: flex;
+    justify-content: space-between;
+    direction: rtl;
+}
+
+.edit-pro-header {
+    padding: .7em 1.2em;
+}
+
+.edit-pro-header h3 {
+    font-weight: 400;
+}
+
+.edit-pro-upload {
+    display: flex;
+    padding: .7em 1.2em;
+}
+
+.edit-pro-img img {
+    border-radius: 50%;
+    margin-left: 2em;
+}
+
+.upload-button {
+    margin-top: 2em;
+    position: relative;
+    top: 30%;
+    z-index: 100;
+    border: 1px solid #917c2a;
+    padding: .1em 2em;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+.each-input-right, .each-input-left {
+    background-color: #1b1a1a;
+    width: 49.5%;
+    border-radius: 0.428rem;
+    padding: .8em 0;
+    margin-bottom: .5em;
+}
+
+.each-input-right input, .each-input-left input, .add-input input, .form-group input {
+    display: block;
+    width: 100%;
+    height: 2.714rem;
+    padding: 0.438rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.45;
+    color: white;
+    background-color: #1b1a1a;
+    background-clip: padding-box;
+    border: 1px solid #D8D6DE;
+    border-radius: 0.357rem;
+}
+
+.each-input-left div, .each-input-right div {
+    margin-bottom: .5em;
+}
+
+.edit-pro-footer button {
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #917c2a;
+    color: #1b1a1a;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.7rem 2rem;
+    line-height: 1;
+    border-radius: 0.358rem;
+}
+
+.edit-pro-body {
+    padding: .7em 1.2em;
+}
+
+.edit-pro-footer {
+    padding: .7em 1.2em;
+}
+
+/*end of edit-profile*/
+.add-input {
+    width: 100%;
+    margin-bottom: .5em;
+    padding: .8em 0;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: .8em;
+}
+
+.small {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.large {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .edit-container, .edit-input {
+        flex-direction: column;
+    }
+
+    .edit-items, .edit-pro-container, .each-input-right, .each-input-left {
+        width: 100%;
+    }
+}

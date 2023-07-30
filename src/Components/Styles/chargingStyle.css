@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.line{
+    border-bottom: 2px #333 solid;
+}
+
+body {
+    background-color: black;
+    font-size: 1rem;
+    color: white;
+}
+.charging-cart{
+    direction: rtl;
+    background-color: #1b1a1a;
+    width: 40%;
+    border-radius: 0.428rem;
+    margin: 2em auto;
+}
+.charging-header,.charging-body{
+    padding: .6em;
+}
+.charging-header h3{
+    font-weight: 500;
+}
+.body-input{
+    display: flex;
+}
+
+.body-input input{
+    width: 100%;
+    padding: .5em;
+    background-color: #1b1a1a;
+    margin-top: .3em;
+    background-clip: padding-box;
+    border: 1px solid #D8D6DE;
+    text-align: center;
+}
+.body-input button{
+    outline: none;
+    padding: .5em;
+    font-size: 1rem;
+    background-color: #333333;
+    color: white;
+    border: 1px solid #D8D6DE;
+    margin-top: .3em;
+}
+
+.body-buttons,.charging-button{
+    display: flex;
+    justify-content: space-between;
+    padding: .5em;
+}
+.body-buttons button{
+    width: 32%;
+    background-color: #333333;
+    color: white;
+    padding: .7em;
+    margin-bottom: .8em;
+    border: 1px solid #D8D6DE;
+    border-radius: .4em;
+    cursor: pointer;
+}
+.charging-button button{
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #917c2a;
+    color: #1b1a1a;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.5rem 2rem;
+    line-height: 1;
+    border-radius: 0.358rem;
+}
+@media (max-width: 768px) {
+    .body-buttons{
+        flex-direction: column;
+    }
+    .body-buttons button{
+        width: 100%;
+    }
+
+}
+@media (max-width: 968px) {
+    .charging-cart{
+        width: 100%;
+    }
+}

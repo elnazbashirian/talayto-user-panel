@@ -1,0 +1,43 @@
+.badge-container{
+    background-color: #1b1a1a;
+    width: 50%;
+    border-radius: 0.428rem;
+    margin: 2em auto;
+    text-align: center;
+}
+.badge-body button{
+    width: 50%;
+    outline: none;
+    padding: .9em;
+    font-size: 1rem;
+    background-color: #1b1a1a;
+    color: white;
+    border: #917c2a 1px solid;
+    margin-top: .3em;
+    cursor: pointer;
+    border-radius: .4em;
+    font-family: estedad, serif;
+}
+.badge-body,.badge-header{
+    padding: 1em 0;
+}
+.call-button,.add-text{
+    margin-top: .7em;
+}
+.user-icon{
+    margin-left: .4em;
+    font-size: .9rem;
+}
+.recep-width{
+    width: 65%;
+}
+@media (max-width: 1067px) {
+    .badge-container{
+        width: 100%;
+    }
+}
+@media (max-width: 570px) {
+    .badge-body button{
+        width: 94%;
+    }
+}

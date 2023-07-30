@@ -1,0 +1,11 @@
+.gold-table,.cash-table{
+    width: 97%;
+    direction: rtl;
+    background-color: #1b1a1a;
+    border-radius: 0.428rem;
+    margin: 1.2em auto;
+}
+
+.min-height{
+    min-height: 130px;
+}

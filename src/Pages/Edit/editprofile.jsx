@@ -11,14 +11,9 @@ function Editprofile(props) {
     });
 
     useEffect(() => {
-        const config = {
-            headers: {
-                'access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZhYTMwNGViMDJiNDI0YmU1NTA5MyIsImlhdCI6MTY5MDI4Nzg1NSwiZXhwIjoxNjkzODg3ODU1fQ.WySC-UCpj8abMiiD3vaTA_QU9CrYjgPwy-80sIdCEf8",
-                'Content-Type': 'application/json'
-            }
-        };
+
         axios
-            .get('/userInfo',config)
+            .get('/userInfo')
             .then((response) => {
                 const data = response.data;
                 setUserData({
@@ -40,14 +35,9 @@ function Editprofile(props) {
         }));
     };
     const handleFormSubmit = () => {
-        const config = {
-            headers: {
-                'access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZhYTMwNGViMDJiNDI0YmU1NTA5MyIsImlhdCI6MTY5MDI4Nzg1NSwiZXhwIjoxNjkzODg3ODU1fQ.WySC-UCpj8abMiiD3vaTA_QU9CrYjgPwy-80sIdCEf8',
-                'Content-Type': 'application/json',
-            },
-        };
+
         axios
-            .put('/userInfo', userData, config)
+            .put('/userInfo', userData)
             .then((response) => {
                 console.log('Profile edit successful:', response);
             })

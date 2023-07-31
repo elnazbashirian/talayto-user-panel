@@ -20,16 +20,16 @@ function Editaddress(props) {
                         <input type='text'/>
                     </div>
                 </div>
-                <div className='form-row'>
-                    <div className='form-group small'>
+                <div className='edit-input'>
+                    <div className='each-input-right'>
                         <div>پلاک</div>
                         <input type='tel'/>
                     </div>
-                    <div className='form-group small'>
-                        <div>واحد</div>
-                        <input type='tel'/>
-                    </div>
-                    <div className='form-group large'>
+                    {/*<div className='form-group small'>*/}
+                    {/*    <div>واحد</div>*/}
+                    {/*    <input type='tel'/>*/}
+                    {/*</div>*/}
+                    <div className='each-input-left'>
                         <div>کد پستی</div>
                         <input type='tel'/>
                         <small>کد پستی باید 10 رقم و بدون خط تیره باشد</small>

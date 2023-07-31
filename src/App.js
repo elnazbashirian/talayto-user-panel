@@ -21,7 +21,8 @@ import Cashreport from "./Pages/Report/Cashreport";
 import Editprofile from "./Pages/Edit/editprofile";
 import Editaddress from "./Pages/Edit/editaddress";
 import Editpassword from "./Pages/Edit/editpassword";
-import "./Axios"
+import "./Axios";
+
 function App() {
   return (
       <BrowserRouter>

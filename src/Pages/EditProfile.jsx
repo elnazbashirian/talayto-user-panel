@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import '../Components/Styles/editprofile.css';
 import TopNav from "../Components/TopNav";
 import {NavLink,Link,Outlet} from "react-router-dom";
-import {FaDollarSign} from "react-icons/fa";
+import axios from "axios";
 
 function EditProfile(props) {
+    const [walletBalance,setWalletBalance] = useState([]);
+    useEffect(() => {
+        axios.get('/userInfo')
+            .then(res => {
+                setWalletBalance(res.data.walletBalance);
+            })
+    }, []);
+    const formatAmount = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
     return (
         <div className='main-container'>
-            <TopNav/>
+            <TopNav walletBalance={formatAmount(walletBalance)}/>
             <div className='edit-container'>
                 <div className='edit-items'>
                     <NavLink to='/edit/edit-profile' className='link' activeclassname="active">

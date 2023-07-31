@@ -5,57 +5,54 @@ import {FaPlusCircle} from "react-icons/fa";
 import axios from "axios";
 
 function Charging(props) {
+
     const [amount, setAmount] = useState("");
     const [walletBalance, setWalletBalance] = useState(0);
+    const [chargeSuccess, setChargeSuccess] = useState(false);
+    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
+
     useEffect(() => {
         fetchWalletBalance();
     }, []);
 
     const fetchWalletBalance = () => {
-
-        const config = {
-            headers: {
-                'access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZhYTMwNGViMDJiNDI0YmU1NTA5MyIsImlhdCI6MTY5MDI4Nzg1NSwiZXhwIjoxNjkzODg3ODU1fQ.WySC-UCpj8abMiiD3vaTA_QU9CrYjgPwy-80sIdCEf8',
-                'Content-Type': 'application/json'
-            }
-        };
-        axios.get('http://91.107.160.88:3001/v1/userInfo', config)
+        axios.get('/userInfo')
             .then((res) => {
                 setWalletBalance(res.data.walletBalance);
             })
     };
 
     const formatAmount = (value) => {
+        if (!value || isNaN(value) || parseFloat(value) === 0) {
+            return "";
+        }
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
     const handleButtonClick = (value) => {
-        if (!isNaN(amount) && amount !== "") {
-            const newValue = parseInt(amount) + parseInt(value);
-            setAmount(newValue.toString());
-        } else {
-            setAmount(value);
-        }
+        const currentAmount = parseFloat(amount) || 0;
+        const newValue = currentAmount + parseFloat(value);
+        setAmount(newValue.toString());
     }
 
     const handleChargeClick = () => {
         const data = {
             walletBalance: amount,
         };
-        const config = {
-            headers: {
-                'access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZhYTMwNGViMDJiNDI0YmU1NTA5MyIsImlhdCI6MTY5MDI4Nzg1NSwiZXhwIjoxNjkzODg3ODU1fQ.WySC-UCpj8abMiiD3vaTA_QU9CrYjgPwy-80sIdCEf8',
-                'Content-Type': 'application/json'
-            }
-        };
 
-        axios.put('http://91.107.160.88:3001/v1/userInfo', data, config)
+        axios.put('/userInfo', data)
             .then((res) => {
                 console.log('PUT request successful:', res);
                 setWalletBalance(amount);
+                setChargeSuccess(true);
+                setShowBubbleMessage(true);
+                setTimeout(() => {
+                    setShowBubbleMessage(false);
+                }, 3000);
             })
             .catch((error) => {
                 console.error('PUT request error:', error);
+                setChargeSuccess(false);
             });
     };
 
@@ -73,7 +70,7 @@ function Charging(props) {
                         <input
                             type='text'
                             value={formatAmount(amount)}
-                            onChange={(e) => setAmount(parseInt(e.target.value))}
+                            onChange={(e) => setAmount(parseFloat(e.target.value.replace(/,/g, "")))}
                         />
                         <button>ریال</button>
                     </div>
@@ -87,8 +84,12 @@ function Charging(props) {
                 <div className='charging-button'>
                     <button onClick={handleChargeClick}><FaPlusCircle className='plus-icon'/>شارژ</button>
                 </div>
-
             </div>
+            {showBubbleMessage && (
+                <div className="bubble-message">
+                    شارژ حساب با موفقیت انجام شد
+                </div>
+            )}
         </div>
     );
 }

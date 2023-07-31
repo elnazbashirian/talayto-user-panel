@@ -6,9 +6,11 @@ function Editprofile(props) {
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
-        phoneNumber: '',
         age: 0,
+        phoneNumber:''
     });
+    const [editSuccess, setEditSuccess] = useState(false);
+    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
 
@@ -19,7 +21,8 @@ function Editprofile(props) {
                 setUserData({
                     firstName: data.firstName,
                     lastName: data.lastName,
-                    age: data.age
+                    age: data.age,
+                    phoneNumber: data.phoneNumber
                 });
             })
             .catch((error) => {
@@ -35,14 +38,24 @@ function Editprofile(props) {
         }));
     };
     const handleFormSubmit = () => {
-
+        let data={
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            age: userData.age
+        }
         axios
-            .put('/userInfo', userData)
+            .put('/userInfo', data)
             .then((response) => {
                 console.log('Profile edit successful:', response);
+                setEditSuccess(true);
+                setShowBubbleMessage(true);
+                setTimeout(() => {
+                    setShowBubbleMessage(false);
+                }, 3000);
             })
             .catch((error) => {
                 console.log('Error editing profile:', error);
+                setEditSuccess(false);
             });
     };
 
@@ -90,7 +103,6 @@ function Editprofile(props) {
                             id='phoneNumber'
                             disabled
                             value={userData.phoneNumber}
-                            onChange={handleInputChange}
                         />
                     </div>
                     <div className='each-input-left'>
@@ -108,6 +120,11 @@ function Editprofile(props) {
             <div className='edit-pro-footer'>
                 <button onClick={handleFormSubmit}>ثبت تغییرات</button>
             </div>
+            {showBubbleMessage && (
+                <div className="bubble-message">
+                    تغییرات با موفقیت اعمال شد
+                </div>
+            )}
         </div>
     );
 }

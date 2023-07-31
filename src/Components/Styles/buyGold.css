@@ -37,7 +37,7 @@ body {
 .cash-input, .gold-input {
     width: 50%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 1em auto;
 }
 
@@ -90,6 +90,12 @@ input[type=checkbox] {
     color: #fff;
     border-radius: 8px;
     z-index: 999;
+}
+.check-box{
+    display: inline-flex;
+}
+.check-box span{
+    margin-right: .5em;
 }
 
 @media (max-width: 1432px) {

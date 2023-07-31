@@ -77,6 +77,17 @@ body {
     line-height: 1;
     border-radius: 0.358rem;
 }
+.bubble-message {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 8px;
+    z-index: 999;
+}
 @media (max-width: 768px) {
     .body-buttons{
         flex-direction: column;

@@ -40,13 +40,12 @@ function Dashboard(props) {
 
     useEffect(() => {
         axios
-            .get('/userGoldTransactions?size=10&page=1')
+            .get(`/userGoldTransactions?size=10&page=1`)
             .then((res) => {
                 console.log(res.data[0])
                 if (res.data.length > 0) {
                     setGoldTransaction(res.data);
-                    const totalCount = parseInt(res.headers.count, 10);
-                    setTotalPages(Math.ceil(totalCount / 10));
+                    setTotalPages(res.headers.count);
                 } else {
                     setGoldTransaction([]);
                 }
@@ -279,19 +278,20 @@ function Dashboard(props) {
                     </div>
                     <div className='number-table'>
                         <h4>  شماره {startIndex + 1} تا {Math.min(endIndex, goldTransaction.length)} از {goldTransaction.length}</h4>
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={totalPages/10}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageChange}
+                            containerClassName={'pagination'}
+                            activeClassName={'active'}
+                        />
                     </div>
-                    <ReactPaginate
-                        previousLabel={'قبلی'}
-                        nextLabel={'بعدی'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={totalPages}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageChange}
-                        containerClassName={'pagination'}
-                        activeClassName={'active'}
-                    />
+
                 </div>
             </div>
 

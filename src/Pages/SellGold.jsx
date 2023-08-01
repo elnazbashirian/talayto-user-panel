@@ -88,14 +88,14 @@ function SellGold(props) {
                         <div className='box-icon'><FaArrowUp/></div>
                         <div className='box-info'>
                             <div className='box-text'>مظنه فروش</div>
-                            <div className='box-number'> {sellQuotation} ریال</div>
+                            <div className='box-number'> {formatAmount(sellQuotation)} ریال</div>
                         </div>
                     </div>
                     <div className='card-box'>
                         <div className='box-icon'><FaArrowDown/></div>
                         <div className='box-info'>
                             <div className='box-text'>مظنه خرید</div>
-                            <div className='box-number'> {buyQuotation} ریال</div>
+                            <div className='box-number'> {formatAmount(buyQuotation)} ریال</div>
                         </div>
 
                     </div>
@@ -103,7 +103,7 @@ function SellGold(props) {
                         <div className='box-icon'><FaCoins/></div>
                         <div className='box-info'>
                             <div className='box-text'>موجودی طلایی</div>
-                            <div className='box-number'>{goldBalance} گرم</div>
+                            <div className='box-number'>{formatAmount(goldBalance)} گرم</div>
                         </div>
                     </div>
                     <div className='card-box'>

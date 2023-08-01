@@ -33,6 +33,7 @@ main {
     background: #1b1a1a;
     color: #fff;
     overflow: hidden;
+    transition: width .3s ease-in-out;
 }
 
 .top_section {

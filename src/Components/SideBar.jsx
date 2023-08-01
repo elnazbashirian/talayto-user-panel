@@ -18,6 +18,13 @@ import {NavLink} from "react-router-dom";
 
 function SideBar({children}) {
     const [isOpen, setIsOpen] = useState(false);
+    const handleMouseEnter = () => {
+        setIsOpen(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsOpen(false);
+    };
     const toggle = () => {
         setIsOpen(!isOpen);
     };
@@ -39,7 +46,8 @@ function SideBar({children}) {
         }
     });
     return (
-        <div>
+        <div     onMouseEnter={handleMouseEnter}
+                 onMouseLeave={handleMouseLeave}>
             <div style={{width: isOpen ? "250px" : "50px"}} className="sidebar hide" ref={menuRef}>
                 <div className="top_section">
                     <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
@@ -100,14 +108,6 @@ function SideBar({children}) {
                     <div className='icon'><FaPowerOff/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">خروج</div>
                 </NavLink>
-                {/*{*/}
-                {/*     menuItem.map((item, index) => (*/}
-                {/*<NavLink to={item.path} key={index} className="link" activeclassname="active">*/}
-                {/*    <div className="icon">{item.icon}</div>*/}
-                {/*    <div style={{display: isOpen ? "block" : "none"}} className="link_text">{item.name}</div>*/}
-                {/*</NavLink>*/}
-                {/*))*/}
-                {/*}*/}
             </div>
             <main>{children}</main>
         </div>

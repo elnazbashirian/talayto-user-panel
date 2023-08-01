@@ -11,9 +11,22 @@ function Goldreport(props) {
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
-                setGoldTransaction(res.data.goldTransaction);
                 setWalletBalance(res.data.walletBalance);
                 setGoldBalance(res.data.goldBalance);
+            })
+    }, []);
+
+    useEffect(() => {
+        axios
+            .get('/userGoldTransactions?size=10&page=1')
+            .then((res) => {
+                console.log(res.data[0])
+                if (res.data.length > 0) {
+
+                    setGoldTransaction(res.data);
+                } else {
+                    setGoldTransaction([]);
+                }
             })
     }, []);
 
@@ -45,15 +58,21 @@ function Goldreport(props) {
                         </tr>
                         </thead>
                         <tbody>
-                        {goldTransaction.map((transaction) => (
-                            <tr key={transaction.id}>
-                                <td>{transaction.trackingCode}</td>
-                                <td>{transaction.weight} گرم</td>
-                                <td>{transaction.transactionType}</td>
-                                <td>{formatAmount(transaction.price)} ریال</td>
-                                <td>{transaction.status}</td>
+                        {goldTransaction.length > 0 ? (
+                            goldTransaction.map((transaction) => (
+                                <tr key={transaction.id}>
+                                    <td>{transaction.trackingCode}</td>
+                                    <td>{formatAmount(transaction.weight)} گرم</td>
+                                    <td>{transaction.transactionType}</td>
+                                    <td>{formatAmount(transaction.price)} ریال</td>
+                                    <td>{transaction.status}</td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan='5'>اطلاعاتی موجود نیست</td>
                             </tr>
-                        ))}
+                        )}
                         </tbody>
                     </table>
                 </div>

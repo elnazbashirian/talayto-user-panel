@@ -13,6 +13,7 @@ import boxtwoimg from '../Images/boxtwoimg.png';
 import TopNav from "../../Components/TopNav";
 import {CChart} from "@coreui/react-chartjs";
 import axios from "axios";
+import ReactPaginate from 'react-paginate';
 
 
 function Dashboard(props) {
@@ -22,9 +23,13 @@ function Dashboard(props) {
     const [goldBalance,setGoldBalance] = useState([]);
     const [walletBalance,setWalletBalance] = useState([]);
     const [goldTransaction, setGoldTransaction] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+
+
 
     useEffect(() => {
-
         axios.get('/userInfo')
             .then(res => {
                 setGoldBalance(res.data.goldBalance);
@@ -35,17 +40,24 @@ function Dashboard(props) {
 
     useEffect(() => {
         axios
-            .get('http://91.107.160.88:3001/v1/userGoldTransactions?size=10&page=1')
+            .get('/userGoldTransactions?size=10&page=1')
             .then((res) => {
                 console.log(res.data[0])
                 if (res.data.length > 0) {
-
                     setGoldTransaction(res.data);
+                    const totalCount = parseInt(res.headers.count, 10);
+                    setTotalPages(Math.ceil(totalCount / 10));
                 } else {
-                    setGoldTransaction([]); // If no data, set goldTransaction to an empty array
+                    setGoldTransaction([]);
                 }
             })
     }, []);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+
 
     const formatAmount = (value) => {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -74,7 +86,16 @@ function Dashboard(props) {
         labels.push(temp._id.month + "/" + temp._id.day)
         data.push(temp.averageField)
     })
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
 
+    const filteredGoldTransaction = goldTransaction.filter((transaction) => {
+        return transaction.trackingCode.includes(searchTerm);
+    });
+    const startIndex = currentPage * 10;
+    const endIndex = startIndex + 10;
+    const currentTransactions = filteredGoldTransaction.slice(startIndex, endIndex);
     return (
         <div className='main-container res-main-container'>
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
@@ -163,7 +184,7 @@ function Dashboard(props) {
                                 borderColor: "#917c2a",
                                 pointBackgroundColor: "rgba(220, 220, 220, 1)",
                                 pointBorderColor: "#fff",
-                                data: data
+                                data: data,
                             }
                             // ,
                             // {
@@ -208,69 +229,6 @@ function Dashboard(props) {
                                 <td>ناموفق</td>
                                 <td>وندار</td>
                             </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
-                            <tr>
-                                <td>بیتا سعیدی</td>
-                                <td>10.000.000 ریال</td>
-                                <td></td>
-                                <td>موفق</td>
-                                <td>تجارت</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -285,12 +243,13 @@ function Dashboard(props) {
                     <div className='line'></div>
                     <div className='search-table'>
                         <span> جست و جو :</span>
-                        <input type='text'/>
+                        <input type='text' value={searchTerm} onChange={handleSearchChange} />
                     </div>
                     <div className='info-table scrollmenu'>
                         <table>
                             <thead>
                             <tr>
+                                <th colSpan='1' rowSpan='1'>تاریخ</th>
                                 <th colSpan='1' rowSpan='1'>کد پیگیری</th>
                                 <th colSpan='1' rowSpan='1'>وزن(گرم)</th>
                                 <th colSpan='1' rowSpan='1'>نوع تراکنش</th>
@@ -299,9 +258,10 @@ function Dashboard(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {goldTransaction.length > 0 ? (
-                                goldTransaction.map((transaction) => (
+                            {currentTransactions.length > 0 ? (
+                                currentTransactions.map((transaction) => (
                                     <tr key={transaction.id}>
+                                        <td>{transaction.date}</td>
                                         <td>{transaction.trackingCode}</td>
                                         <td>{formatAmount(transaction.weight)} گرم</td>
                                         <td>{transaction.transactionType}</td>
@@ -318,8 +278,20 @@ function Dashboard(props) {
                         </table>
                     </div>
                     <div className='number-table'>
-                        <h4>شماره 1 تا 1 از {goldTransaction.length}</h4>
+                        <h4>  شماره {startIndex + 1} تا {Math.min(endIndex, goldTransaction.length)} از {goldTransaction.length}</h4>
                     </div>
+                    <ReactPaginate
+                        previousLabel={'قبلی'}
+                        nextLabel={'بعدی'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={totalPages}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                    />
                 </div>
             </div>
 

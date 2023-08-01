@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     background-color: black;
     font-family: "B Nazanin";
@@ -251,6 +252,39 @@ th {
 div.scrollmenu {
     overflow: auto;
     white-space: nowrap;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a,
+.pagination button {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+.pagination .active a,
+.pagination .active button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.pagination .disabled a,
+.pagination .disabled button {
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 @media (max-width: 1296px) {

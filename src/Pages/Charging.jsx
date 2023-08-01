@@ -8,6 +8,7 @@ function Charging(props) {
 
     const [amount, setAmount] = useState("");
     const [walletBalance, setWalletBalance] = useState(0);
+    const [goldBalance,setGoldBalance] = useState([]);
     const [chargeSuccess, setChargeSuccess] = useState(false);
     const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
@@ -19,6 +20,7 @@ function Charging(props) {
         axios.get('/userInfo')
             .then((res) => {
                 setWalletBalance(res.data.walletBalance);
+                setGoldBalance(res.data.goldBalance);
             })
     };
 
@@ -58,7 +60,7 @@ function Charging(props) {
 
     return (
         <div className='main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='charging-cart'>
                 <div className='charging-header'>
                     <h3>افزایش اعتبار</h3>

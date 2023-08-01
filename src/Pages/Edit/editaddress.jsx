@@ -1,29 +1,111 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
 function Editaddress(props) {
+    const [userData, setUserData] = useState({
+        province: '',
+        city: '',
+        address: '',
+        postalCode:'',
+        plaque:''
+    });
+    const [editSuccess, setEditSuccess] = useState(false);
+    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
+
+    useEffect(() => {
+        axios
+            .get('/userInfo')
+            .then((response) => {
+                const data = response.data;
+                setUserData({
+                    province: data.addresses[0].province,
+                    city: data.addresses[0].city,
+                    address: data.addresses[0].address,
+                    postalCode: data.addresses[0].postalCode,
+                    plaque: data.addresses[0].plaque
+                });
+            })
+            .catch((error) => {
+                console.log('Error fetching user data:', error);
+            });
+    }, []);
+
+    const handleInputChange = (event) => {
+        const { id, value } = event.target;
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            [id]: value,
+        }));
+    };
+    const handleFormSubmit = () => {
+        let data={
+            addresses:[{
+                province: userData.province,
+                city: userData.city,
+                address: userData.address,
+                postalCode: userData.postalCode,
+                plaque: userData.plaque
+            }]
+
+        }
+        axios
+            .put('/userInfo', data)
+            .then((response) => {
+                console.log('Profile edit successful:', response);
+                setEditSuccess(true);
+                setShowBubbleMessage(true);
+                setTimeout(() => {
+                    setShowBubbleMessage(false);
+                }, 3000);
+            })
+            .catch((error) => {
+                console.log('Error editing profile:', error);
+                setEditSuccess(false);
+            });
+    };
     return (
         <div className='edit-pro-container'>
             <div className='edit-pro-body'>
                 <div className='edit-input'>
                     <div className='each-input-right'>
                         <div>استان</div>
-                        <input type='password' id='name'/>
+                        <input
+                            type='text'
+                            id='province'
+                            value={userData.province}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className='each-input-left'>
                         <div>شهر</div>
-                        <input type='password' id='username'/>
+                        <input
+                            type='text'
+                            id='city'
+                            value={userData.city}
+                            onChange={handleInputChange}
+                        />
                     </div>
                 </div>
                 <div className='edit-input'>
                     <div className='add-input'>
                         <div>آدرس</div>
-                        <input type='text'/>
+                        <input
+                            type='text'
+                            id='address'
+                            value={userData.address}
+                            onChange={handleInputChange}
+                        />
                     </div>
                 </div>
                 <div className='edit-input'>
                     <div className='each-input-right'>
                         <div>پلاک</div>
-                        <input type='tel'/>
+                        <input
+                            type='text'
+                            id='plaque'
+                            value={userData.plaque}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     {/*<div className='form-group small'>*/}
                     {/*    <div>واحد</div>*/}
@@ -31,15 +113,25 @@ function Editaddress(props) {
                     {/*</div>*/}
                     <div className='each-input-left'>
                         <div>کد پستی</div>
-                        <input type='tel'/>
+                        <input
+                            type='text'
+                            id='postalCode'
+                            value={userData.postalCode}
+                            onChange={handleInputChange}
+                        />
                         <small>کد پستی باید 10 رقم و بدون خط تیره باشد</small>
                     </div>
                 </div>
             </div>
             <div className='line'></div>
             <div className='edit-pro-footer'>
-                <button>ثبت آدرس</button>
+                <button onClick={handleFormSubmit}>ثبت آدرس</button>
             </div>
+            {showBubbleMessage && (
+                <div className="bubble-message">
+                    تغییرات با موفقیت اعمال شد
+                </div>
+            )}
         </div>
     );
 }

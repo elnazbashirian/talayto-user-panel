@@ -13,7 +13,6 @@ function Editprofile(props) {
     const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
-
         axios
             .get('/userInfo')
             .then((response) => {

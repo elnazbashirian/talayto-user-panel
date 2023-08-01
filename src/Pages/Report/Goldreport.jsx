@@ -6,12 +6,14 @@ import axios from "axios";
 function Goldreport(props) {
     const [goldTransaction, setGoldTransaction] = useState([]);
     const [walletBalance,setWalletBalance] = useState([]);
+    const [goldBalance,setGoldBalance] = useState([]);
 
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
                 setGoldTransaction(res.data.goldTransaction);
                 setWalletBalance(res.data.walletBalance);
+                setGoldBalance(res.data.goldBalance);
             })
     }, []);
 
@@ -21,7 +23,7 @@ function Goldreport(props) {
 
     return (
         <div className='main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='gold-table'>
                 <div className='table-header'>
                     <h4>وضعیت تراکنش های طلایی</h4>

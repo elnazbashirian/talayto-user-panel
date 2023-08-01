@@ -6,10 +6,12 @@ import axios from "axios";
 
 function EditProfile(props) {
     const [walletBalance,setWalletBalance] = useState([]);
+    const [goldBalance,setGoldBalance] = useState([]);
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
                 setWalletBalance(res.data.walletBalance);
+                setGoldBalance(res.data.goldBalance);
             })
     }, []);
     const formatAmount = (value) => {
@@ -17,7 +19,7 @@ function EditProfile(props) {
     };
     return (
         <div className='main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='edit-container'>
                 <div className='edit-items'>
                     <NavLink to='/edit/edit-profile' className='link' activeclassname="active">

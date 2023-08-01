@@ -18,6 +18,7 @@ function BuyGold(props) {
     const [walletBalance,setWalletBalance] = useState([]);
     const [buySuccess, setBuySuccess] = useState(false);
     const [showBubbleMessage, setShowBubbleMessage] = useState(false);
+    const [showBubbleMessage1, setShowBubbleMessage1] = useState(null);
 
 
     useEffect(() => {
@@ -82,14 +83,13 @@ function BuyGold(props) {
             .catch((error) => {
                 console.log('Error:', error);
                 setBuySuccess(false);
+                setShowBubbleMessage1(error.response.data.message)
             });
     };
 
-
-
     return (
         <div className='main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='top-card'>
                 <div className='card-body-buy'>
                     <div className='card-box'>
@@ -178,6 +178,11 @@ function BuyGold(props) {
             {showBubbleMessage && (
                 <div className="bubble-message">
                     خرید طلا با موفقیت انجام شد
+                </div>
+            )}
+            {showBubbleMessage1 && (
+                <div className="bubble-message">
+                    {showBubbleMessage1}
                 </div>
             )}
         </div>

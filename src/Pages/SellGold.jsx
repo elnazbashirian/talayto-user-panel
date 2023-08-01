@@ -81,7 +81,7 @@ function SellGold(props) {
     };
     return (
         <div className='main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='top-card'>
                 <div className='card-body-buy'>
                     <div className='card-box'>
@@ -134,7 +134,12 @@ function SellGold(props) {
                             />
                             <span>مبلغ پرداختی(ریال)</span>
                         </div>
-                        <input type='number' value={paymentAmount} onChange={handlePaymentAmountChange}/>
+                        <input
+                            type='text'
+                            value={paymentAmount}
+                            onChange={handlePaymentAmountChange}
+                            disabled={selectedOption === 'gold'}
+                        />
                     </div>
                     <div className='gold-input'>
                         <div className='check-box'>
@@ -143,12 +148,17 @@ function SellGold(props) {
                                 id="html"
                                 name="fav_language"
                                 value="gold"
-                                checked={selectedOption === "gold"} // Check if the selectedOption is "gold"
-                                onChange={handleOptionChange} // Update the selectedOption on change
+                                checked={selectedOption === "gold"}
+                                onChange={handleOptionChange}
                             />
                             <span>طلای درخواستی(گرم)</span>
                         </div>
-                        <input type='number' value={requestedGold} onChange={handleRequestedGoldChange}/>
+                        <input
+                            type='text'
+                            value={requestedGold}
+                            onChange={handleRequestedGoldChange}
+                            disabled={selectedOption === 'price'}
+                        />
                     </div>
                     <div className='wage'>کارمزد : 5.000 تومان </div>
                 </div>

@@ -29,7 +29,21 @@ function Dashboard(props) {
             .then(res => {
                 setGoldBalance(res.data.goldBalance);
                 setWalletBalance(res.data.walletBalance);
-                setGoldTransaction(res.data.goldTransaction)
+            })
+    }, []);
+
+
+    useEffect(() => {
+        axios
+            .get('http://91.107.160.88:3001/v1/userGoldTransactions?size=10&page=1')
+            .then((res) => {
+                console.log(res.data[0])
+                if (res.data.length > 0) {
+
+                    setGoldTransaction(res.data);
+                } else {
+                    setGoldTransaction([]); // If no data, set goldTransaction to an empty array
+                }
             })
     }, []);
 
@@ -63,7 +77,7 @@ function Dashboard(props) {
 
     return (
         <div className='main-container res-main-container'>
-            <TopNav walletBalance={formatAmount(walletBalance)}/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='card-container'>
                 <div className='left-card'>
                     <div className='card-header'>
@@ -75,14 +89,14 @@ function Dashboard(props) {
                             <div className='box-icon'><FaArrowUp/></div>
                             <div className='box-info'>
                                 <div className='box-text'>مظنه فروش</div>
-                                <div className='box-number'> {sellQuotation} ریال</div>
+                                <div className='box-number'> {formatAmount(sellQuotation)} ریال</div>
                             </div>
                         </div>
                         <div className='card-box'>
                             <div className='box-icon'><FaArrowDown/></div>
                             <div className='box-info'>
                                 <div className='box-text'>مظنه خرید</div>
-                                <div className='box-number'> {buyQuotation} ریال</div>
+                                <div className='box-number'> {formatAmount(buyQuotation)} ریال</div>
                             </div>
                         </div>
                         <div className='card-box'>
@@ -110,14 +124,14 @@ function Dashboard(props) {
                             <div className='box-icon'><FaArrowUp/></div>
                             <div className='box-info'>
                                 <div className='box-text'>مظنه فروش</div>
-                                <div className='box-number'> {sellQuotation} ریال</div>
+                                <div className='box-number'> {formatAmount(sellQuotation)} ریال</div>
                             </div>
                         </div>
                         <div className='card-box'>
                             <div className='box-icon'><FaArrowDown/></div>
                             <div className='box-info'>
                                 <div className='box-text'>مظنه خرید</div>
-                                <div className='box-number'> {buyQuotation} ریال</div>
+                                <div className='box-number'> {formatAmount(buyQuotation)} ریال</div>
                             </div>
                         </div>
                     </div>
@@ -125,12 +139,12 @@ function Dashboard(props) {
                 <div className='right-card'>
                     <div className='box-one'>
                         <div>موجودی ریالی</div>
-                        <div>{formatAmount(walletBalance)}</div>
+                        <div>{formatAmount(walletBalance)} ریال </div>
                         <img src={boxoneimg}/>
                     </div>
                     <div className='box-two'>
                         <div>موجودی طلایی</div>
-                        <div>{goldBalance}</div>
+                        <div>{formatAmount(goldBalance)} گرم </div>
                         <img src={boxtwoimg}/>
                         {/*<div><FaChartBar className='chart-line-icon'/></div>*/}
                     </div>
@@ -145,8 +159,8 @@ function Dashboard(props) {
                         datasets: [
                             {
                                 label: "My First dataset",
-                                backgroundColor: "rgba(220, 220, 220, 0.2)",
-                                borderColor: "rgba(220, 220, 220, 1)",
+                                backgroundColor: "#fff",
+                                borderColor: "#917c2a",
                                 pointBackgroundColor: "rgba(220, 220, 220, 1)",
                                 pointBorderColor: "#fff",
                                 data: data
@@ -285,15 +299,21 @@ function Dashboard(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {goldTransaction.map((transaction) => (
-                                <tr key={transaction.id}>
-                                    <td>{transaction.trackingCode}</td>
-                                    <td>{transaction.weight} گرم</td>
-                                    <td>{transaction.transactionType}</td>
-                                    <td>{formatAmount(transaction.price)} ریال</td>
-                                    <td>{transaction.status}</td>
+                            {goldTransaction.length > 0 ? (
+                                goldTransaction.map((transaction) => (
+                                    <tr key={transaction.id}>
+                                        <td>{transaction.trackingCode}</td>
+                                        <td>{formatAmount(transaction.weight)} گرم</td>
+                                        <td>{transaction.transactionType}</td>
+                                        <td>{formatAmount(transaction.price)} ریال</td>
+                                        <td>{transaction.status}</td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan='5'>اطلاعاتی موجود نیست</td>
                                 </tr>
-                            ))}
+                            )}
                             </tbody>
                         </table>
                     </div>

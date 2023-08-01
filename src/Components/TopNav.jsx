@@ -18,22 +18,8 @@ import {NavLink} from "react-router-dom";
 import SideBar from "./SideBar";
 import axios from "axios";
 
-function TopNav({walletBalance,children}) {
+function TopNav({goldBalance,walletBalance,children}) {
     const [isShown, setIsShown] = useState(true);
-    const [goldBalance,setGoldBalance] = useState([]);
-
-    useEffect(() => {
-        const config = {
-            headers: {
-                'access-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZhYTMwNGViMDJiNDI0YmU1NTA5MyIsImlhdCI6MTY5MDI4Nzg1NSwiZXhwIjoxNjkzODg3ODU1fQ.WySC-UCpj8abMiiD3vaTA_QU9CrYjgPwy-80sIdCEf8",
-                'Content-Type': 'application/json'
-            }
-        };
-        axios.get('http://91.107.160.88:3001/v1/userInfo',config)
-            .then(res => {
-                setGoldBalance(res.data.goldBalance);
-            })
-    }, []);
 
     const shown = () => {
         setIsShown(!isShown);

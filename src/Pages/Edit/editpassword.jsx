@@ -21,8 +21,7 @@ function Editpassword(props) {
             phoneNumber: phoneNumber,
         };
         axios.post('/user/forgetpassword', data).then((response) => {
-            const verificationCodeFromResponse = response.data.entries[0].message.match(/\d+/)[0];
-            setVerificationCode(verificationCodeFromResponse);
+            console.log(response.data)
         })
     };
 
@@ -38,7 +37,7 @@ function Editpassword(props) {
         };
 
         axios
-            .post('/user/signup/verification', data)
+            .post('/user/forgetPasswordVerification', data)
             .then((response) => {
                 localStorage.setItem("access-token", response.data.accessToken)
                 localStorage.setItem("refresh-token", response.data.refreshToken)
@@ -80,7 +79,7 @@ function Editpassword(props) {
                     <div className='each-input-right'>
                         <div>
                             <div style={{marginRight: '10px'}}> کد دریافتی</div>
-                            <input type='text' id='name' onChange={(e) => setVerificationCode(e.target.value)}/>
+                            <input type='text' id='code' value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} />
                         </div>
                     </div>
                 </div>
@@ -90,7 +89,7 @@ function Editpassword(props) {
                         <div style={{ position: 'relative' }}>
                             <input
                                 type={showPassword1  ? 'text' : 'password'} // Toggle between text and password type
-                                id='name'
+                                id='password'
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 pattern="/^[a-zA-Z0-9]{8,16}$/"
                             />
@@ -106,7 +105,7 @@ function Editpassword(props) {
                         <div style={{ position: 'relative' }}>
                             <input
                                 type={showPassword2 ? 'text' : 'password'}
-                                id='username'
+                                id='repeatPassword'
                                 onChange={(e) => setRepeatPassword(e.target.value)}
                             />
                             {showPassword2 ? (

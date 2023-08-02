@@ -18,15 +18,14 @@ import ReactPaginate from 'react-paginate';
 
 function Dashboard(props) {
     const [datas, setDatas] = useState([]);
-    const [buyQuotation,setBuyQuotation] = useState([]);
-    const [sellQuotation,setSellQuotation] = useState([]);
-    const [goldBalance,setGoldBalance] = useState([]);
-    const [walletBalance,setWalletBalance] = useState([]);
+    const [buyQuotation, setBuyQuotation] = useState([]);
+    const [sellQuotation, setSellQuotation] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
+    const [walletBalance, setWalletBalance] = useState([]);
     const [goldTransaction, setGoldTransaction] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
 
 
     useEffect(() => {
@@ -37,25 +36,26 @@ function Dashboard(props) {
             })
     }, []);
 
+    const handlePageChange = ({selected}) => {
+        setCurrentPage(selected);
+    };
+
 
     useEffect(() => {
         axios
             .get(`/userGoldTransactions?size=10&page=1`)
             .then((res) => {
-                console.log(res.data[0])
                 if (res.data.length > 0) {
+                    console.log(res.data);
                     setGoldTransaction(res.data);
-                    setTotalPages(res.headers.count);
+                    const totalPages = res.headers.count;
+                    setTotalPages(totalPages);
+                    console.log(totalPages)
                 } else {
                     setGoldTransaction([]);
                 }
             })
     }, []);
-
-    const handlePageChange = ({ selected }) => {
-        setCurrentPage(selected);
-    };
-
 
 
     const formatAmount = (value) => {
@@ -92,8 +92,9 @@ function Dashboard(props) {
     const filteredGoldTransaction = goldTransaction.filter((transaction) => {
         return transaction.trackingCode.includes(searchTerm);
     });
-    const startIndex = currentPage * 10;
-    const endIndex = startIndex + 10;
+    const itemsPerPage = 10;
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
     const currentTransactions = filteredGoldTransaction.slice(startIndex, endIndex);
     return (
         <div className='main-container res-main-container'>
@@ -159,12 +160,12 @@ function Dashboard(props) {
                 <div className='right-card'>
                     <div className='box-one'>
                         <div>موجودی ریالی</div>
-                        <div>{formatAmount(walletBalance)} ریال </div>
+                        <div>{formatAmount(walletBalance)} ریال</div>
                         <img src={boxoneimg}/>
                     </div>
                     <div className='box-two'>
                         <div>موجودی طلایی</div>
-                        <div>{formatAmount(goldBalance)} گرم </div>
+                        <div>{formatAmount(goldBalance)} گرم</div>
                         <img src={boxtwoimg}/>
                         {/*<div><FaChartBar className='chart-line-icon'/></div>*/}
                     </div>
@@ -242,7 +243,7 @@ function Dashboard(props) {
                     <div className='line'></div>
                     <div className='search-table'>
                         <span> جست و جو :</span>
-                        <input type='text' value={searchTerm} onChange={handleSearchChange} />
+                        <input type='text' value={searchTerm} onChange={handleSearchChange}/>
                     </div>
                     <div className='info-table scrollmenu'>
                         <table>
@@ -277,13 +278,13 @@ function Dashboard(props) {
                         </table>
                     </div>
                     <div className='number-table'>
-                        <h4>  شماره {startIndex + 1} تا {Math.min(endIndex, goldTransaction.length)} از {goldTransaction.length}</h4>
+                        <h4> شماره {startIndex + 1} تا {Math.min(endIndex, goldTransaction.length)} از {goldTransaction.length}</h4>
                         <ReactPaginate
                             previousLabel={'<'}
                             nextLabel={'>'}
                             breakLabel={'...'}
                             breakClassName={'break-me'}
-                            pageCount={totalPages/10}
+                            pageCount={Math.ceil(totalPages/10)}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
                             onPageChange={handlePageChange}

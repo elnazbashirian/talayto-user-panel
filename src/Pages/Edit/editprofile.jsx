@@ -62,17 +62,17 @@ function Editprofile(props) {
         <div className='edit-pro-container'>
             <div className='edit-pro-header'><h3>ویرایش پروفایل</h3></div>
             <div className='line'></div>
-            <div className='edit-pro-upload'>
-                <a href="" className="edit-pro-img">
-                    <img src={profileimg} id="account-upload-img"
-                         alt="profile image" height="75" width="75"/>
-                </a>
-                <div>
-                    <label htmlFor='upload' className='upload-button'>بارگذاری</label>
-                    <input type="file" id="upload" className='hidden' accept="image/*" />
-                </div>
-            </div>
-            <div className='line'></div>
+            {/*<div className='edit-pro-upload'>*/}
+            {/*    <a href="" className="edit-pro-img">*/}
+            {/*        <img src={profileimg} id="account-upload-img"*/}
+            {/*             alt="profile image" height="75" width="75"/>*/}
+            {/*    </a>*/}
+            {/*    <div>*/}
+            {/*        <label htmlFor='upload' className='upload-button'>بارگذاری</label>*/}
+            {/*        <input type="file" id="upload" className='hidden' accept="image/*" />*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            {/*<div className='line'></div>*/}
             <div className='edit-pro-body'>
                 <div className='edit-input'>
                     <div className='each-input-right'>

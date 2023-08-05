@@ -15,12 +15,12 @@ body {
 .charging-cart{
     direction: rtl;
     background-color: #1b1a1a;
-    width: 40%;
+    width: 45%;
     border-radius: 0.428rem;
     margin: 2em auto;
 }
 .charging-header,.charging-body{
-    padding: .6em;
+    padding: 1em;
 }
 .charging-header h3{
     font-weight: 500;
@@ -35,47 +35,59 @@ body {
     background-color: #1b1a1a;
     margin-top: .3em;
     background-clip: padding-box;
-    border: 1px solid #D8D6DE;
+    border: 1px solid #373228;
     text-align: center;
 }
 .body-input button{
     outline: none;
     padding: .5em;
     font-size: 1rem;
-    background-color: #333333;
+    background-color: #292620;
     color: white;
-    border: 1px solid #D8D6DE;
+    border: 1px solid #292620;
     margin-top: .3em;
+    margin-right: .5em;
+    width: 55px;
+    height: 38px;
+    top: 691px;
+    left: 361px;
+    border-radius: 8px
+
 }
 
 .body-buttons,.charging-button{
     display: flex;
     justify-content: space-between;
-    padding: .5em;
+    padding: .7em;
+}
+.charging-button{
+    justify-content: flex-end;
 }
 .body-buttons button{
     width: 32%;
-    background-color: #333333;
+    background-color: rgba(55, 50, 40, 0.54);
     color: white;
     padding: .7em;
     margin-bottom: .8em;
-    border: 1px solid #D8D6DE;
+    border: 1px solid rgba(55, 50, 40, 0.54);
     border-radius: .4em;
     cursor: pointer;
 }
 .charging-button button{
     outline: none;
     font-size: 1.1rem;
-    background-color: #917c2a;
-    color: #1b1a1a;
+    background-color: rgba(174, 155, 122, 0.52);
+    border: 1px solid rgba(174, 155, 122, 0.52);
+    color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
-    font-weight: 500;
+    font-weight: 300;
     text-align: center;
     vertical-align: middle;
     padding: 0.5rem 2rem;
     line-height: 1;
-    border-radius: 0.358rem;
+    border-radius: 8px;
+    width: 158px;
 }
 .bubble-message {
     position: fixed;
@@ -87,6 +99,11 @@ body {
     color: #fff;
     border-radius: 8px;
     z-index: 999;
+}
+.charging-header{
+    background-color: rgba(77, 69, 55, 0.72);
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 14px;
 }
 @media (max-width: 768px) {
     .body-buttons{

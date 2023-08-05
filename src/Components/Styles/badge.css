@@ -12,7 +12,7 @@
     font-size: 1rem;
     background-color: #1b1a1a;
     color: white;
-    border: #917c2a 1px solid;
+    border: 1px solid rgba(174, 155, 122, 0.52);
     margin-top: .3em;
     cursor: pointer;
     border-radius: .4em;

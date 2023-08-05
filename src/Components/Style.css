@@ -59,8 +59,8 @@ main {
 }
 
 .link:hover {
-    background: #917c2a;
-    color: #000;
+    background-color: #95856A;
+    color: black;
     transition: all 0.5s;
 }
 
@@ -85,8 +85,8 @@ main {
 }
 
 .active {
-    background: #917C2AFF;
-    color: #000;
+    background-color: #95856A;
+    color: black;
 }
 
 .icon, .link_text {
@@ -94,7 +94,7 @@ main {
 }
 
 .active-top {
-    background-color: #1b1a1a;
+    background-color: black;
 }
 
 .icon-bar {

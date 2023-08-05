@@ -50,7 +50,7 @@ function TopNav({goldBalance,walletBalance,children}) {
         <>
             <div className='top-nav'>
                 <div className='top-nav-left'>
-                    <NavLink className='user-icon-wrapper' to='/edit/edit-profile'> <FaUser
+                    <NavLink className='user-icon-wrapper active-top' to='/edit/edit-profile'> <FaUser
                         className='user-icon'/></NavLink>
                     <div className='stocks'>
                         <div className='gold-stock'>{goldBalance}

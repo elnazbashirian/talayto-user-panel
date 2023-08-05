@@ -8,7 +8,7 @@ import EditProfile from "./Pages/EditProfile";
 import Information from "./Pages/Information";
 import Badge from "./Pages/Badge";
 import Reception from "./Pages/Reception";
-import Support from "./Pages/Support";
+import Orders from "./Pages/Orders";
 import Exit from "./Pages/Exit";
 import './App.css';
 import './fonts/Estedad-Bold.woff2';
@@ -21,7 +21,9 @@ import Cashreport from "./Pages/Report/Cashreport";
 import Editprofile from "./Pages/Edit/editprofile";
 import Editaddress from "./Pages/Edit/editaddress";
 import Editpassword from "./Pages/Edit/editpassword";
+import OrderDetail from "./Pages/Orders/OrderDetail";
 import "./Axios";
+
 
 function App() {
   return (
@@ -43,7 +45,8 @@ function App() {
             <Route path='/info' element={<Information/>}/>
             <Route path='/badge' element={<Badge/>}/>
             <Route path='/reception' element={<Reception/>}/>
-            <Route path='/support' element={<Support/>}/>
+            <Route path='/order' element={<Orders/>}/>
+            <Route path="/order/:id" element={<OrderDetail />} />
             <Route path='/exit' element={<Exit/>}/>
           </Routes>
         </div>

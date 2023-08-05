@@ -21,19 +21,16 @@ body {
     margin: .8em;
 }
 
-.top-nav .user-icon-wrapper:hover {
-    background-color: #917c2a;
-    color: black;
-}
 
 .top-nav {
     overflow: hidden;
-    background-color: #1b1a1a;
+    background-color: black;
     display: flex;
     flex: 1 1 auto;
     justify-content: space-between;
     align-items: center;
     border-radius: 0.428rem;
+    border-bottom: 1px solid #95856A;
 }
 
 .top-nav .user-icon-wrapper {
@@ -47,9 +44,9 @@ body {
 }
 
 .gold-stock, .bag-stock {
-    color: black;
-    background-color: white;
-    border: 3px #917c2a solid;
+    color: rgba(255, 252, 252, 0.72);
+    background-color: #1b1a1a;
+    border: 2px solid rgba(149, 133, 106, 0.52);
     height: .3em;
     margin-top: .6em;
     display: flex;
@@ -68,10 +65,12 @@ body {
 
 .plus-button {
     margin-right: 1em;
-    padding: .5em 1em;
+    padding: .5em 1.2em;
     border-radius: 5%;
     font-size: 1rem;
-    border: 3px #917c2a solid;
+    color: rgba(255, 252, 252, 0.72);
+    background-color: #1b1a1a;
+    border: 2px solid rgba(149, 133, 106, 0.52);
     cursor: pointer;
 }
 
@@ -81,12 +80,12 @@ body {
 
 .box-icon {
     margin-left: .8em;
-    color: #1e1e1d;
+    color: #241204;
     font-size: x-large;
-    background-color: #917c2a;
+    background-color: #95856A;
     border-radius: 50%;
-    height: 45px;
-    width: 45px;
+    height: 48px;
+    width: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,8 +99,10 @@ body {
 .left-card {
     width: 60%;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.29);
-    color: white;
+    border: 1px solid rgba(149, 133, 106, 0.52);
+    color: rgba(255, 252, 252, 0.72);
+    font-weight: 400;
+    font-size: 18px;
     margin-top: 1.5em;
     padding: 2em 1.5em;
     border-radius: 0.428rem;
@@ -159,8 +160,9 @@ body {
 
 .box-one, .box-two {
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.29);
-    color: white;
+    border: 1px solid rgba(149, 133, 106, 0.52);
+    color: rgba(255, 252, 252, 0.72);
+    font-size: 18px;
     margin-top: 1.5em;
     padding: 1em 1em;
     border-radius: 0.428rem;
@@ -192,7 +194,7 @@ body {
 }
 
 .left-table, .right-table {
-    background-color: #1b1a1a;
+    background-color: #191817;
     width: 49.5%;
     border-radius: 0.428rem;
 }
@@ -217,7 +219,7 @@ body {
 .search-table input {
     margin-right: .3em;
     background-color: #1b1a1a;
-    border: #917c2a 2px solid;
+    border: 2px solid #373228;
     border-radius: .428em;
     padding: .4em 1.5em;
 }
@@ -278,7 +280,7 @@ div.scrollmenu {
 
 .pagination .active a,
 .pagination .active button {
-    border: 1px #917c2a solid;
+    border: 1px rgba(149, 133, 106, 0.52) solid;
     background-color: #1b1a1a;
     color: #fff;
 }

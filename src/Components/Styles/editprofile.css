@@ -82,10 +82,10 @@
     font-weight: 400;
     line-height: 1.45;
     color: white;
-    background-color: #1b1a1a;
     background-clip: padding-box;
-    border: 1px solid #D8D6DE;
     border-radius: 0.357rem;
+    background-color: #1b1a1a;
+    border: 2px solid #373228;
 }
 
 .each-input-left div, .each-input-right div {
@@ -95,8 +95,6 @@
 .edit-pro-footer button {
     outline: none;
     font-size: 1.1rem;
-    background-color: #917c2a;
-    color: #1b1a1a;
     cursor: pointer;
     display: inline-block;
     font-weight: 500;
@@ -105,6 +103,9 @@
     padding: 0.7rem 2rem;
     line-height: 1;
     border-radius: 0.358rem;
+    background-color: rgba(174, 155, 122, 0.52);
+    border: 1px solid rgba(174, 155, 122, 0.52);
+    color: #FFFFFF;
 }
 
 .edit-pro-body {
@@ -143,12 +144,9 @@
 }
 .code-button{
    marginRight: 30px;
-    /*marginTop: 30px;*/
-    /*padding: 8px 1.5em ;*/
     outline: none;
     font-size: 1.1rem;
     background-color: #917c2a;
-    color: #1b1a1a;
     cursor: pointer;
     display: inline-block;
     font-weight: 500;
@@ -157,6 +155,9 @@
     padding: 0.7rem 2rem;
     line-height: 1;
     border-radius: 0.358rem;
+    background-color: rgba(174, 155, 122, 0.52);
+    border: 1px solid rgba(174, 155, 122, 0.52);
+    color: #FFFFFF;
 }
 .bubble-message {
     position: fixed;

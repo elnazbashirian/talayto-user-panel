@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TopNav from "../../Components/TopNav";
 import '../../Components/Styles/goldreport.css';
+import axios from "axios";
 
 function Cashreport(props) {
+    const [walletBalance, setWalletBalance] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
+    useEffect(() => {
+        axios.get('/userInfo')
+            .then(res => {
+                setGoldBalance(res.data.goldBalance);
+                setWalletBalance(res.data.walletBalance);
+            })
+    }, []);
+    const formatAmount = (value) => {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
     return (
         <div className='main-container'>
-            <TopNav/>
+            <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='cash-table'>
                 <div className='table-header'>
                     <h4>وضعیت تراکنش های ریالی</h4>

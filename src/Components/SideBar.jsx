@@ -12,7 +12,7 @@ import {
     FaIdBadge,
     FaHandHoldingUsd,
     FaUserFriends,
-    FaPowerOff, FaArrowDown
+    FaPowerOff, FaArrowDown,FaShoppingBag
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 
@@ -100,9 +100,9 @@ function SideBar({children}) {
                     <div className='icon'><FaHandHoldingUsd/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">دریافت فیزیکی طلا</div>
                 </NavLink>
-                <NavLink to='/support' className='link' activeclassname="active">
-                    <div className='icon'><FaUserFriends/></div>
-                    <div style={{display: isOpen ? "block" : "none"}} className="link_text">پشتیبانی</div>
+                <NavLink to='/order' className='link' activeclassname="active">
+                    <div className='icon'><FaShoppingBag/></div>
+                    <div style={{display: isOpen ? "block" : "none"}} className="link_text">سفارشات من</div>
                 </NavLink>
                 <NavLink to='/exit' className='link' activeclassname="active">
                     <div className='icon'><FaPowerOff/></div>

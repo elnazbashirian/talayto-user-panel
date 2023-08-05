@@ -27,7 +27,6 @@ function Dashboard(props) {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
-
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
@@ -36,6 +35,7 @@ function Dashboard(props) {
             })
     }, []);
 
+
     const handlePageChange = ({selected}) => {
         setCurrentPage(selected);
     };
@@ -43,7 +43,7 @@ function Dashboard(props) {
 
     useEffect(() => {
         axios
-            .get(`/userGoldTransactions?size=10&page=1`)
+            .get(`/userGoldTransactions?size=100&page=1`)
             .then((res) => {
                 if (res.data.length > 0) {
                     console.log(res.data);
@@ -181,7 +181,7 @@ function Dashboard(props) {
                             {
                                 label: "My First dataset",
                                 backgroundColor: "#fff",
-                                borderColor: "#917c2a",
+                                borderColor: "#95856A",
                                 pointBackgroundColor: "rgba(220, 220, 220, 1)",
                                 pointBorderColor: "#fff",
                                 data: data,

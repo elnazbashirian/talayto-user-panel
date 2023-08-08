@@ -254,7 +254,9 @@ th {
 div.scrollmenu {
     overflow: auto;
     white-space: nowrap;
+
 }
+
 .pagination {
     display: flex;
   justify-content: flex-end;

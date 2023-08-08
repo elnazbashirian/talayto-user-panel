@@ -3,9 +3,10 @@ import '../Components/Styles/buyGold.css';
 import TopNav from "../Components/TopNav";
 import {FaArrowDown, FaArrowUp, FaCashRegister, FaCoins} from "react-icons/fa";
 import axios from "axios";
+import Toast from "../Toast";
+import {ToastContainer} from "react-toastify";
 
 function BuyGold(props) {
-
     const [paymentAmount, setPaymentAmount] = useState('');
     const [requestedGold, setRequestedGold] = useState('');
     const [selectedOption, setSelectedOption] = useState("price");
@@ -16,10 +17,6 @@ function BuyGold(props) {
     const [sellQuotation,setSellQuotation] = useState([]);
     const [goldBalance,setGoldBalance] = useState([]);
     const [walletBalance,setWalletBalance] = useState([]);
-    const [buySuccess, setBuySuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
-    const [showBubbleMessage1, setShowBubbleMessage1] = useState(null);
-
 
     useEffect(() => {
         axios.get('/userInfo')
@@ -73,25 +70,16 @@ function BuyGold(props) {
 
         axios.post('/user/buyGold', data)
             .then((response) => {
-                console.log('Response:', response);
-                setBuySuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast('خرید با موفقیت انجام شد',true);
             })
             .catch((error) => {
-                console.log('Error:', error);
-                setBuySuccess(false);
-                setShowBubbleMessage1(error.response.data.message);
-                setTimeout(() => {
-                    setShowBubbleMessage1(null);
-                }, 3000);
+                Toast("موجودی کافی نیست",false);
             });
     };
 
     return (
         <div className='main-container'>
+            <ToastContainer />
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='top-card'>
                 <div className='card-body-buy'>
@@ -178,16 +166,16 @@ function BuyGold(props) {
                     <button>خرید به اندازه کل موجودی</button>
                 </div>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    خرید طلا با موفقیت انجام شد
-                </div>
-            )}
-            {showBubbleMessage1 && (
-                <div className="bubble-message1">
-                    {showBubbleMessage1}
-                </div>
-            )}
+            {/*{showBubbleMessage && (*/}
+            {/*    <div className="bubble-message">*/}
+            {/*        خرید طلا با موفقیت انجام شد*/}
+            {/*    </div>*/}
+            {/*)}*/}
+            {/*{showBubbleMessage1 && (*/}
+            {/*    <div className="bubble-message1">*/}
+            {/*        {showBubbleMessage1}*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
 
     );

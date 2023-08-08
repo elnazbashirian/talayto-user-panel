@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import Toast from "../../Toast";
+import {ToastContainer} from "react-toastify";
 
 function Editaddress(props) {
     const [userData, setUserData] = useState({
@@ -9,8 +11,6 @@ function Editaddress(props) {
         postalCode:'',
         plaque:''
     });
-    const [editSuccess, setEditSuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
         axios
@@ -52,19 +52,16 @@ function Editaddress(props) {
             .put('/userInfo', data)
             .then((response) => {
                 console.log('Profile edit successful:', response);
-                setEditSuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast('تغییرات اعمال شد',true);
             })
             .catch((error) => {
                 console.log('Error editing profile:', error);
-                setEditSuccess(false);
+                Toast("تغییرات امکان پذیر نیست",false);
             });
     };
     return (
         <div className='edit-pro-container'>
+            <ToastContainer/>
             <div className='edit-pro-body'>
                 <div className='edit-input'>
                     <div className='each-input-right'>
@@ -127,11 +124,6 @@ function Editaddress(props) {
             <div className='edit-pro-footer'>
                 <button onClick={handleFormSubmit}>ثبت آدرس</button>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    تغییرات با موفقیت اعمال شد
-                </div>
-            )}
         </div>
     );
 }

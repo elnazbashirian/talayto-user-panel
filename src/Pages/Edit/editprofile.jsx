@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
-import profileimg from '../Images/image-profile.png';
 import axios from "axios";
+import Toast from "../../Toast";
+import {ToastContainer} from "react-toastify";
 
 function Editprofile(props) {
     const [userData, setUserData] = useState({
@@ -9,8 +10,6 @@ function Editprofile(props) {
         age: 0,
         phoneNumber:''
     });
-    const [editSuccess, setEditSuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
         axios
@@ -46,20 +45,17 @@ function Editprofile(props) {
             .put('/userInfo', data)
             .then((response) => {
                 console.log('Profile edit successful:', response);
-                setEditSuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast('تغییرات اعمال شد',true);
             })
             .catch((error) => {
                 console.log('Error editing profile:', error);
-                setEditSuccess(false);
+                Toast("تغییرات امکان پذیر نیست",false);
             });
     };
 
     return (
         <div className='edit-pro-container'>
+            <ToastContainer/>
             <div className='edit-pro-header'><h3>ویرایش پروفایل</h3></div>
             <div className='line'></div>
             {/*<div className='edit-pro-upload'>*/}
@@ -119,11 +115,6 @@ function Editprofile(props) {
             <div className='edit-pro-footer'>
                 <button onClick={handleFormSubmit}>ثبت تغییرات</button>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    تغییرات با موفقیت اعمال شد
-                </div>
-            )}
         </div>
     );
 }

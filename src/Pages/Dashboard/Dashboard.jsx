@@ -33,6 +33,9 @@ function Dashboard(props) {
                 setGoldBalance(res.data.goldBalance);
                 setWalletBalance(res.data.walletBalance);
             })
+            .catch((error)=>{
+                console.log(error)
+            })
     }, []);
 
 
@@ -46,11 +49,9 @@ function Dashboard(props) {
             .get(`/userGoldTransactions?size=100&page=1`)
             .then((res) => {
                 if (res.data.length > 0) {
-                    console.log(res.data);
                     setGoldTransaction(res.data);
                     const totalPages = res.headers.count;
                     setTotalPages(totalPages);
-                    console.log(totalPages)
                 } else {
                     setGoldTransaction([]);
                 }
@@ -186,15 +187,6 @@ function Dashboard(props) {
                                 pointBorderColor: "#fff",
                                 data: data,
                             }
-                            // ,
-                            // {
-                            //     label: "My Second dataset",
-                            //     backgroundColor: "rgba(151, 187, 205, 0.2)",
-                            //     borderColor: "rgba(151, 187, 205, 1)",
-                            //     pointBackgroundColor: "rgba(151, 187, 205, 1)",
-                            //     pointBorderColor: "#fff",
-                            //     data: [50, 12, 28, 29, 7, 25, 12]
-                            // },
                         ],
                     }}
                 />

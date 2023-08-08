@@ -3,14 +3,14 @@ import '../Components/Styles/chargingStyle.css';
 import TopNav from "../Components/TopNav";
 import {FaPlusCircle} from "react-icons/fa";
 import axios from "axios";
+import Toast from "../Toast";
+import {ToastContainer} from "react-toastify";
 
 function Charging(props) {
 
     const [amount, setAmount] = useState("");
     const [walletBalance, setWalletBalance] = useState(0);
     const [goldBalance,setGoldBalance] = useState([]);
-    const [chargeSuccess, setChargeSuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
         fetchWalletBalance();
@@ -46,20 +46,17 @@ function Charging(props) {
             .then((res) => {
                 console.log('PUT request successful:', res);
                 setWalletBalance(amount);
-                setChargeSuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast('شارژ با موفقیت انجام شد',true)
             })
             .catch((error) => {
                 console.error('PUT request error:', error);
-                setChargeSuccess(false);
+                Toast(error.response.message,false);
             });
     };
 
     return (
         <div className='main-container'>
+            <ToastContainer />
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='charging-cart'>
                 <div className='charging-header'>
@@ -87,11 +84,6 @@ function Charging(props) {
                     <button onClick={handleChargeClick}><FaPlusCircle className='plus-icon'/>شارژ</button>
                 </div>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    شارژ حساب با موفقیت انجام شد
-                </div>
-            )}
         </div>
     );
 }

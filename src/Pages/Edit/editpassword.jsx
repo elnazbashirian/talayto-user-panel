@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import { FaEye,FaEyeDropper } from 'react-icons/fa';
+import Toast from "../../Toast";
+import {ToastContainer} from "react-toastify";
 
 function Editpassword(props) {
     const [verificationCode, setVerificationCode] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [buySuccess, setBuySuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
     const [repeatPassword, setRepeatPassword] = useState('');
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
@@ -27,7 +27,7 @@ function Editpassword(props) {
 
     const handleSubmitChanges = () => {
         if (newPassword !== repeatPassword) {
-            alert('رمز عبور و تکرار رمز عبور یکسان نیست');
+            Toast("رمز عبور و تکرار آن یکسان نیستند",false);
             return;
         }
         const data = {
@@ -41,15 +41,11 @@ function Editpassword(props) {
             .then((response) => {
                 localStorage.setItem("access-token", response.data.accessToken)
                 localStorage.setItem("refresh-token", response.data.refreshToken)
-                setBuySuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast("تغییرات اعمال شد",true);
             })
             .catch((error) => {
                 console.log('Error:', error);
-                setBuySuccess(false);
+                Toast("تغییرات امکان پذیر نیست",false);
             });
     };
     const togglePasswordVisibility1 = () => {
@@ -61,6 +57,7 @@ function Editpassword(props) {
     };
     return (
         <div className='edit-pro-container'>
+            <ToastContainer/>
             <div className='edit-pro-body'>
                 <div className='each-input-right' style={{display: 'flex', alignItems: 'center'}}>
                     <div>
@@ -121,11 +118,6 @@ function Editpassword(props) {
             <div className='edit-pro-footer'>
                 <button onClick={handleSubmitChanges}>ثبت تغییرات</button>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    رمز عبور با موفقیت تغییر یافت
-                </div>
-            )}
         </div>
     );
 }

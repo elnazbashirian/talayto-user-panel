@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import TopNav from "../Components/TopNav";
 import {FaArrowDown, FaArrowUp, FaCashRegister, FaCoins} from "react-icons/fa";
 import axios from "axios";
+import Toast from "../Toast";
+import {ToastContainer} from "react-toastify";
 
 function SellGold(props) {
     const [paymentAmount, setPaymentAmount] = useState('');
@@ -14,8 +16,6 @@ function SellGold(props) {
     const [sellQuotation,setSellQuotation] = useState([]);
     const [goldBalance,setGoldBalance] = useState([]);
     const [walletBalance,setWalletBalance] = useState([]);
-    const [buySuccess, setBuySuccess] = useState(false);
-    const [showBubbleMessage, setShowBubbleMessage] = useState(false);
 
     useEffect(() => {
         axios.get('/userInfo')
@@ -68,19 +68,16 @@ function SellGold(props) {
         axios.post('/user/sellGold', data)
             .then((response) => {
                 console.log('Response:', response);
-                setBuySuccess(true);
-                setShowBubbleMessage(true);
-                setTimeout(() => {
-                    setShowBubbleMessage(false);
-                }, 3000);
+                Toast('خرید با موفقیت انجام شد',true)
             })
             .catch((error) => {
                 console.log('Error:', error);
-                setBuySuccess(false); // Update the buySuccess state to false when the request fails
+                Toast("موجودی کافی نیست",false);
             });
     };
     return (
         <div className='main-container'>
+            <ToastContainer />
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='top-card'>
                 <div className='card-body-buy'>
@@ -168,11 +165,6 @@ function SellGold(props) {
                     <button>فروش به اندازه کل موجودی</button>
                 </div>
             </div>
-            {showBubbleMessage && (
-                <div className="bubble-message">
-                    فروش طلا با موفقیت انجام شد!
-                </div>
-            )}
         </div>
 
     );

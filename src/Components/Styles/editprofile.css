@@ -1,3 +1,12 @@
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus {
+    -webkit-text-fill-color: #FFFFFF;
+    background-color: #1b1a1a;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .line {
     border-bottom: 2px #333 solid;
 }
@@ -116,7 +125,6 @@
     padding: .7em 1.2em;
 }
 
-/*end of edit-profile*/
 .add-input {
     width: 100%;
     margin-bottom: .5em;

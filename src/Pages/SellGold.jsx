@@ -72,7 +72,7 @@ function SellGold(props) {
             })
             .catch((error) => {
                 console.log('Error:', error);
-                Toast("موجودی کافی نیست",false);
+                Toast(error.response.data.message,false);
             });
     };
     return (

@@ -7,6 +7,9 @@ import Toast from "../Toast";
 import {ToastContainer} from "react-toastify";
 
 function BuyGold(props) {
+    const [goldInput, setGoldInput] = useState('');
+    const [priceInput, setPriceInput] = useState('');
+    const [calculatedResult, setCalculatedResult] = useState('');
     const [paymentAmount, setPaymentAmount] = useState('');
     const [requestedGold, setRequestedGold] = useState('');
     const [selectedOption, setSelectedOption] = useState("price");
@@ -17,6 +20,25 @@ function BuyGold(props) {
     const [sellQuotation,setSellQuotation] = useState([]);
     const [goldBalance,setGoldBalance] = useState([]);
     const [walletBalance,setWalletBalance] = useState([]);
+
+    const calculateGoldAndPrice = (type, value) => {
+        axios.post('/user/computing', {
+            type,
+            value,
+        })
+            .then((response) => {
+                setCalculatedResult(response.data.result.toFixed(3));
+                if (type === 'buy-price') {
+                    setGoldInput(response.data.result.toFixed(3));
+                } else if (type === 'buy-weight') {
+                    setPriceInput(formatAmount(response.data.result * 1185600000));
+                }
+            })
+            .catch((error) => {
+                console.error('Error calculating gold and price:', error);
+            });
+    };
+
 
     useEffect(() => {
         axios.get('/userInfo')
@@ -48,12 +70,20 @@ function BuyGold(props) {
             })
     }, []);
 
-    const handlePaymentAmountChange = (event) => {
-        setPaymentAmount(event.target.value);
+    const handleRequestedGoldChange = (event) => {
+        const newGoldInput = event.target.value;
+        setGoldInput(newGoldInput);
+        const calculatedPrice = parseFloat(newGoldInput) * 23724000;
+        setPriceInput(formatAmount(calculatedPrice));
+        setCalculatedResult(newGoldInput);
     };
 
-    const handleRequestedGoldChange = (event) => {
-        setRequestedGold(event.target.value);
+    const handlePaymentAmountChange = (event) => {
+        const newPriceInput = event.target.value;
+        setPriceInput(newPriceInput);
+        const calculatedGold = parseFloat(newPriceInput) / 23724000;
+        setGoldInput(calculatedGold.toFixed(3));
+        setCalculatedResult(newPriceInput);
     };
 
     const handleOptionChange = (event) => {
@@ -64,8 +94,8 @@ function BuyGold(props) {
 
     const handleSubmit = () => {
         const data = {
-            type: selectedOption === "gold" ? "buy-weight" : "buy-price",
-            value: selectedOption === "gold" ? +requestedGold : +paymentAmount,
+            type: selectedOption === 'gold' ? 'buy-weight' : 'buy-price',
+            value: selectedOption === 'gold' ? parseFloat(goldInput) : parseFloat(priceInput),
         };
 
         axios.post('/user/buyGold', data)
@@ -73,7 +103,7 @@ function BuyGold(props) {
                 Toast('خرید با موفقیت انجام شد',true);
             })
             .catch((error) => {
-                Toast("موجودی کافی نیست",false);
+                Toast(error.response.data.message,false);
             });
     };
 
@@ -134,7 +164,7 @@ function BuyGold(props) {
                         </div>
                         <input
                             type='text'
-                            value={paymentAmount}
+                            value={priceInput}
                             onChange={handlePaymentAmountChange}
                             disabled={selectedOption === 'gold'}
                         />
@@ -153,7 +183,7 @@ function BuyGold(props) {
                         </div>
                         <input
                             type='text'
-                            value={requestedGold}
+                            value={goldInput}
                             onChange={handleRequestedGoldChange}
                             disabled={selectedOption === 'price'}
                         />

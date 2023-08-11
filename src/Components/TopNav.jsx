@@ -12,13 +12,13 @@ import {
     FaEdit,
     FaInfo,
     FaIdBadge,
-    FaHandHoldingUsd, FaUserFriends, FaPowerOff, FaClosedCaptioning, FaWindowClose,
+    FaHandHoldingUsd, FaPowerOff, FaShoppingBag,
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 import SideBar from "./SideBar";
 import axios from "axios";
 
-function TopNav({goldBalance,walletBalance,children}) {
+function TopNav({goldBalance, walletBalance, children}) {
     const [isShown, setIsShown] = useState(true);
 
     const shown = () => {
@@ -46,6 +46,7 @@ function TopNav({goldBalance,walletBalance,children}) {
             document.removeEventListener('mousedown', handler);
         }
     });
+
     return (
         <>
             <div className='top-nav'>
@@ -116,9 +117,9 @@ function TopNav({goldBalance,walletBalance,children}) {
                         <div className='icon'><FaHandHoldingUsd/></div>
                         <div className="link_text">دریافت فیزیکی طلا</div>
                     </NavLink>
-                    <NavLink to='/support' className='link' activeclassname="active">
-                        <div className='icon'><FaUserFriends/></div>
-                        <div className="link_text">پشتیبانی</div>
+                    <NavLink to='/order' className='link' activeclassname="active">
+                        <div className='icon'><FaShoppingBag/></div>
+                        <div className="link_text">سفارشات من</div>
                     </NavLink>
                     <NavLink to='/exit' className='link' activeclassname="active">
                         <div className='icon'><FaPowerOff/></div>

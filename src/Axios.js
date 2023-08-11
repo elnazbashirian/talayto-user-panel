@@ -1,10 +1,10 @@
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://91.107.160.88:3001/v1';
+axios.defaults.baseURL = 'http://api.talayto.com/v1';
 
 axios.interceptors.request.use(function (config) {
     if (!localStorage.getItem("access-token")) {
-        localStorage.setItem("access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YmZiNjQwNGViMDJiNDI0YmU1NTE2ZiIsImlhdCI6MTY5MDgxODE0NSwiZXhwIjoxNjk0NDE4MTQ1fQ.YDmJ2vsFkpz2MtXX4EMbKh7DntS3TF_n1zsFL26R0vo")
+        localStorage.setItem("access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDM0ZGM0YjZkMWQ4OTE0MDRhN2Q0MCIsImlhdCI6MTY5MTU2OTYzMSwiZXhwIjoxNjk1MTY5NjMxfQ.VAh0jPtWT0iV3_kltdY9H5qCpZ5g23TEwv1fsTn-c-Y")
     }
     config.headers['access-token'] = localStorage.getItem("access-token")
     config.headers['Content-Type'] = 'application/json'

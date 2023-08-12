@@ -33,7 +33,7 @@ main {
     background: #1b1a1a;
     color: #fff;
     overflow: hidden;
-    transition: width .3s ease-in-out;
+    transition: width .5s ease-in-out;
 }
 
 .top_section {
@@ -56,6 +56,7 @@ main {
     gap: 15px;
     transition: all 0.5s;
     cursor: pointer;
+    font-size: 16px;
 }
 
 .link:hover {

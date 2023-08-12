@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import TopNav from "../Components/TopNav";
 import {FaArrowDown, FaArrowUp, FaCashRegister, FaCoins} from "react-icons/fa";
 import axios from "axios";
 import Toast from "../Toast";
 import {ToastContainer} from "react-toastify";
+import TopNav from "../Components/TopNav";
 
 function SellGold(props) {
     const [paymentAmount, setPaymentAmount] = useState('');
@@ -12,10 +12,10 @@ function SellGold(props) {
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
     const [maxGoldWeight, setMaxGoldWeight] = useState('');
-    const [buyQuotation,setBuyQuotation] = useState([]);
-    const [sellQuotation,setSellQuotation] = useState([]);
-    const [goldBalance,setGoldBalance] = useState([]);
-    const [walletBalance,setWalletBalance] = useState([]);
+    const [buyQuotation, setBuyQuotation] = useState([]);
+    const [sellQuotation, setSellQuotation] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
+    const [walletBalance, setWalletBalance] = useState([]);
 
     useEffect(() => {
         axios.get('/userInfo')
@@ -68,16 +68,16 @@ function SellGold(props) {
         axios.post('/user/sellGold', data)
             .then((response) => {
                 console.log('Response:', response);
-                Toast('خرید با موفقیت انجام شد',true)
+                Toast('خرید با موفقیت انجام شد', true)
             })
             .catch((error) => {
                 console.log('Error:', error);
-                Toast(error.response.data.message,false);
+                Toast(error.response.data.message, false);
             });
     };
     return (
         <div className='main-container'>
-            <ToastContainer />
+            <ToastContainer/>
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='top-card'>
                 <div className='card-body-buy'>
@@ -157,7 +157,7 @@ function SellGold(props) {
                             disabled={selectedOption === 'price'}
                         />
                     </div>
-                    <div className='wage'>کارمزد : 5.000 تومان </div>
+                    <div className='wage'>کارمزد : 5.000 تومان</div>
                 </div>
                 <div className='line'></div>
                 <div className='below-footer sell-footer'>

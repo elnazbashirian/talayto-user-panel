@@ -27,6 +27,7 @@ function BuyGold(props) {
             value,
         })
             .then((response) => {
+                console.log(response.data.result)
                 setCalculatedResult(response.data.result.toFixed(3));
                 if (type === 'buy-price') {
                     setGoldInput(response.data.result.toFixed(3));
@@ -34,11 +35,7 @@ function BuyGold(props) {
                     setPriceInput(formatAmount(response.data.result * 1185600000));
                 }
             })
-            .catch((error) => {
-                console.error('Error calculating gold and price:', error);
-            });
     };
-
 
     useEffect(() => {
         axios.get('/userInfo')
@@ -50,6 +47,9 @@ function BuyGold(props) {
     }, []);
 
     const formatAmount = (value) => {
+        if (!value || isNaN(value) || parseFloat(value) === 0) {
+            return "";
+        }
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 

@@ -14,8 +14,6 @@ import TopNav from "../../Components/TopNav";
 import {CChart} from "@coreui/react-chartjs";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
-import Toast from "../../Toast";
-import {ToastContainer} from "react-toastify";
 
 
 function Dashboard(props) {
@@ -35,9 +33,6 @@ function Dashboard(props) {
                 setGoldBalance(res.data.goldBalance);
                 setWalletBalance(res.data.walletBalance);
             })
-            .catch((error)=>{
-                Toast(error.res.data.message,false);
-            })
     }, []);
 
 
@@ -56,7 +51,6 @@ function Dashboard(props) {
                     setTotalPages(totalPages);
                 } else {
                     setGoldTransaction([]);
-                    Toast(res.data.message,false);
                 }
             })
     }, []);
@@ -71,9 +65,6 @@ function Dashboard(props) {
             .then(res => {
                 setBuyQuotation(res.data.buyQuotation);
                 setSellQuotation(res.data.sellQuotation);
-            })
-            .catch(error=>{
-                Toast(error.res.data.message,false);
             })
     }, []);
 
@@ -105,7 +96,6 @@ function Dashboard(props) {
     const currentTransactions = filteredGoldTransaction.slice(startIndex, endIndex);
     return (
         <div className='main-container res-main-container'>
-            <ToastContainer />
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='card-container'>
                 <div className='left-card'>
@@ -175,7 +165,6 @@ function Dashboard(props) {
                         <div>موجودی طلایی</div>
                         <div>{formatAmount(goldBalance)} گرم</div>
                         <img src={boxtwoimg}/>
-                        {/*<div><FaChartBar className='chart-line-icon'/></div>*/}
                     </div>
                 </div>
             </div>
@@ -283,7 +272,7 @@ function Dashboard(props) {
                             nextLabel={'>'}
                             breakLabel={'...'}
                             breakClassName={'break-me'}
-                            pageCount={Math.ceil(totalPages/10)}
+                            pageCount={Math.ceil(totalPages / 10)}
                             marginPagesDisplayed={2}
                             pageRangeDisplayed={5}
                             onPageChange={handlePageChange}
@@ -294,7 +283,6 @@ function Dashboard(props) {
 
                 </div>
             </div>
-
         </div>
 
     );

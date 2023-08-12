@@ -79,10 +79,11 @@ function Dashboard(props) {
     var labels = [];
     var data = [];
 
-    datas.map(temp => {
-        labels.push(temp._id.month + "/" + temp._id.day)
-        data.push(temp.averageField)
-    })
+    datas.forEach(temp => {
+        labels.unshift(temp._id.month + "/" + temp._id.day); // Using unshift to reverse the order
+        data.unshift(temp.averageField); // Using unshift to reverse the order
+    });
+
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
     };

@@ -1,4 +1,4 @@
-import goldimg from '../Images/goldimg.webp'
+import goldimg from '../Images/goldimg.webp';
 import React, {useEffect, useState} from 'react';
 import TopNav from '../../Components/TopNav';
 import axios from 'axios';
@@ -45,6 +45,7 @@ function OrderDetail() {
                         <div className='order-date'> تاریخ : {order.date} </div>
                     </div>
                     <div>
+                        {/*order.products[0].productDetails.thumbnailImage*/}
                         <img src={goldimg} alt={`Product`} />
                     </div>
                 </div>

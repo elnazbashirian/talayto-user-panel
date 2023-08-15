@@ -178,6 +178,23 @@ textarea:-webkit-autofill:focus {
     border-radius: 8px;
     z-index: 999;
 }
+
+.exit-button{
+    outline: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.7rem 2rem;
+    line-height: 1;
+    border-radius: 0.358rem;
+    background-color: rgba(220, 6, 27, 0.91);
+    border: 1px solid rgba(174, 155, 122, 0.52);
+    color: #FFFFFF;
+    display: inline-block;
+    margin: 2em 2em;
+}
+
 @media (max-width: 768px) {
     .edit-container, .edit-input {
         flex-direction: column;

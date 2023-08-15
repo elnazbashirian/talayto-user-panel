@@ -52,6 +52,10 @@ function SideBar({children}) {
                         <FaBars onClick={toggle}/>
                     </div>
                 </div>
+                <NavLink to='http://talayto.com' className='link' activeclassname="active">
+                    <div className='icon'><FaPowerOff/></div>
+                    <div style={{display: isOpen ? "block" : "none"}} className="link_text">بازگشت به فروشگاه</div>
+                </NavLink>
                 <NavLink to='/' className='link' activeclassname="active">
                     <div className='icon'><FaHome/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">صفحه اصلی</div>
@@ -101,10 +105,6 @@ function SideBar({children}) {
                 <NavLink to='/order' className='link' activeclassname="active">
                     <div className='icon'><FaShoppingBag/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">سفارشات من</div>
-                </NavLink>
-                <NavLink to='http://talayto.com' className='link' activeclassname="active">
-                    <div className='icon'><FaPowerOff/></div>
-                    <div style={{display: isOpen ? "block" : "none"}} className="link_text">خروج</div>
                 </NavLink>
             </div>
             <main>{children}</main>

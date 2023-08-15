@@ -17,6 +17,17 @@ function EditProfile(props) {
     const formatAmount = (value) => {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
+
+    const handleLogout = async () => {
+        try {
+            await axios.post('/user/logout');
+            localStorage.removeItem('access-token');
+            window.location.href = 'http://www.talayto.com';
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    };
+
     return (
         <div className='main-container'>
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
@@ -34,6 +45,7 @@ function EditProfile(props) {
                 </div>
                 <Outlet/>
             </div>
+            <button className='exit-button' onClick={handleLogout}>خروج از حساب کاربری</button>
         </div>
     );
 }

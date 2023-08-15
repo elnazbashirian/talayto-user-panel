@@ -123,7 +123,7 @@ function TopNav({goldBalance, walletBalance, children}) {
                     </NavLink>
                     <NavLink to='http://talayto.com' className='link' activeclassname="active">
                         <div className='icon'><FaPowerOff/></div>
-                        <div className="link_text">خروج</div>
+                        <div className="link_text">بازگشت به سایت اصلی</div>
                     </NavLink>
                     {/*{*/}
                     {/*     menuItem.map((item, index) => (*/}

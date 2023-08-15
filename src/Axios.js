@@ -6,7 +6,7 @@ axios.interceptors.request.use(function (config) {
     if (!localStorage.getItem("access-token")) {
         window.location.href = "http://www.talayto.com/login";
     }
-    config.headers['user-access-token'] = localStorage.getItem("access-token")
+    config.headers['access-token'] = localStorage.getItem("access-token")
     config.headers['Content-Type'] = 'application/json'
 
     return config;

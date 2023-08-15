@@ -14,6 +14,7 @@ import TopNav from "../../Components/TopNav";
 import {CChart} from "@coreui/react-chartjs";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
+import {useLocation} from "react-router-dom";
 
 
 function Dashboard(props) {
@@ -27,6 +28,13 @@ function Dashboard(props) {
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const accessToken = queryParams.get("accessToken")
+    if (accessToken) {
+        localStorage.setItem("access-token", accessToken);
+    }
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {

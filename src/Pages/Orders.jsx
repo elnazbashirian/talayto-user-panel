@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import TopNav from '../Components/TopNav';
 import '../Components/Styles/order.css';
+import goldimg from './Images/goldimg.webp';
+
 import axios from 'axios';
 
 function Orders(props) {
@@ -48,7 +50,7 @@ function Orders(props) {
                 orders.map(order => (
                     <div key={order.id} className="order" onClick={() => handleOrderClick(order)}>
                         <div className="image-orders">
-                            <img src={order.products[0]?.productDetails.thumbnailImage} alt={`Jewelry ${order.id}`} />
+                            <img src={goldimg} alt={`Jewelry ${order.id}`} />
                             <div className="line"></div>
                         </div>
                         <div className="order-info">

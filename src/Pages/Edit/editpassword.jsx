@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import { FaEye,FaEyeDropper } from 'react-icons/fa';
+import {FaEye, FaEyeDropper} from 'react-icons/fa';
 import Toast from "../../Toast";
 import {ToastContainer} from "react-toastify";
 
@@ -14,20 +14,20 @@ function Editpassword(props) {
 
     const handlePhoneNumberChange = (event) => {
         setPhoneNumber(event.target.value);
-    }   ;
+    };
 
     const handleSendCode = () => {
         const data = {
             phoneNumber: phoneNumber,
         };
         axios.post('/user/forgetpassword', data).then((response) => {
-            console.log(response.data)
+            Toast("کد ارسال شد", true);
         })
     };
 
     const handleSubmitChanges = () => {
         if (newPassword !== repeatPassword) {
-            Toast("رمز عبور و تکرار آن یکسان نیستند",false);
+            Toast("رمز عبور و تکرار آن یکسان نیستند", false);
             return;
         }
         const data = {
@@ -41,13 +41,14 @@ function Editpassword(props) {
             .then((response) => {
                 localStorage.setItem("access-token", response.data.accessToken)
                 localStorage.setItem("refresh-token", response.data.refreshToken)
-                Toast("تغییرات اعمال شد",true);
+                Toast("تغییرات اعمال شد", true);
             })
             .catch((error) => {
                 console.log('Error:', error);
-                Toast("تغییرات امکان پذیر نیست",false);
+                Toast("تغییرات امکان پذیر نیست", false);
             });
     };
+
     const togglePasswordVisibility1 = () => {
         setShowPassword1((prevShowPassword1) => !prevShowPassword1);
     };
@@ -55,6 +56,7 @@ function Editpassword(props) {
     const togglePasswordVisibility2 = () => {
         setShowPassword2((prevShowPassword2) => !prevShowPassword2);
     };
+
     return (
         <div className='edit-pro-container'>
             <ToastContainer/>
@@ -67,8 +69,7 @@ function Editpassword(props) {
                     <button
                         className='code-button'
                         style={{marginRight: '30px', marginTop: '30px', padding: '10px 1.8em'}}
-                        onClick={handleSendCode}
-                    >
+                        onClick={handleSendCode}>
                         ارسال کد
                     </button>
                 </div>
@@ -76,39 +77,60 @@ function Editpassword(props) {
                     <div className='each-input-right'>
                         <div>
                             <div style={{marginRight: '10px'}}> کد دریافتی</div>
-                            <input type='text' id='code' value={verificationCode} onChange={(e) => setVerificationCode(e.target.value)} />
+                            <input type='text' id='code' value={verificationCode}
+                                   onChange={(e) => setVerificationCode(e.target.value)}/>
                         </div>
                     </div>
                 </div>
                 <div className='edit-input'>
                     <div className='each-input-right'>
                         <div>رمز عبور جدید</div>
-                        <div style={{ position: 'relative' }}>
+                        <div style={{position: 'relative'}}>
                             <input
-                                type={showPassword1  ? 'text' : 'password'} // Toggle between text and password type
+                                type={showPassword1 ? 'text' : 'password'} // Toggle between text and password type
                                 id='password'
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 pattern="/^[a-zA-Z0-9]{8,16}$/"
                             />
                             {showPassword1 ? (
-                                <FaEye style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)' }} onClick={togglePasswordVisibility1} />
+                                <FaEye style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '10px',
+                                    transform: 'translateY(-50%)'
+                                }} onClick={togglePasswordVisibility1}/>
                             ) : (
-                                <FaEye style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)' }} onClick={togglePasswordVisibility1} />
+                                <FaEye style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '10px',
+                                    transform: 'translateY(-50%)'
+                                }} onClick={togglePasswordVisibility1}/>
                             )}
                         </div>
                     </div>
                     <div className='each-input-left'>
                         <div>تکرار رمز عبور(حداقل 6 کاراکتر)</div>
-                        <div style={{ position: 'relative' }}>
+                        <div style={{position: 'relative'}}>
                             <input
                                 type={showPassword2 ? 'text' : 'password'}
                                 id='repeatPassword'
                                 onChange={(e) => setRepeatPassword(e.target.value)}
                             />
                             {showPassword2 ? (
-                                <FaEye style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)' }} onClick={togglePasswordVisibility2} />
+                                <FaEye style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '10px',
+                                    transform: 'translateY(-50%)'
+                                }} onClick={togglePasswordVisibility2}/>
                             ) : (
-                                <FaEye style={{ position: 'absolute', top: '50%', left: '10px', transform: 'translateY(-50%)' }} onClick={togglePasswordVisibility2} />
+                                <FaEye style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '10px',
+                                    transform: 'translateY(-50%)'
+                                }} onClick={togglePasswordVisibility2}/>
                             )}
                         </div>
                     </div>

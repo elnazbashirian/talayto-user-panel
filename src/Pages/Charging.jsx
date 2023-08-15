@@ -10,19 +10,17 @@ function Charging(props) {
 
     const [amount, setAmount] = useState("");
     const [walletBalance, setWalletBalance] = useState(0);
-    const [goldBalance,setGoldBalance] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
+
 
     useEffect(() => {
-        fetchWalletBalance();
-    }, []);
-
-    const fetchWalletBalance = () => {
         axios.get('/userInfo')
             .then((res) => {
                 setWalletBalance(res.data.walletBalance);
                 setGoldBalance(res.data.goldBalance);
             })
-    };
+    }, []);
+
 
     const formatAmount = (value) => {
         if (!value || isNaN(value) || parseFloat(value) === 0) {
@@ -46,17 +44,17 @@ function Charging(props) {
             .then((res) => {
                 console.log('PUT request successful:', res);
                 setWalletBalance(amount);
-                Toast('شارژ با موفقیت انجام شد',true)
+                Toast('شارژ با موفقیت انجام شد', true)
             })
             .catch((error) => {
                 console.error('PUT request error:', error);
-                Toast(error.response.message,false);
+                Toast(error.response.message, false);
             });
     };
 
     return (
         <div className='main-container'>
-            <ToastContainer />
+            <ToastContainer/>
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='charging-cart'>
                 <div className='charging-header'>

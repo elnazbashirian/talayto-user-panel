@@ -80,8 +80,8 @@ function Dashboard(props) {
     var data = [];
 
     datas.forEach(temp => {
-        labels.unshift(temp._id.month + "/" + temp._id.day); // Using unshift to reverse the order
-        data.unshift(temp.averageField); // Using unshift to reverse the order
+        labels.unshift(temp._id.month + "/" + temp._id.day);
+        data.unshift(temp.averageField);
     });
 
     const handleSearchChange = (event) => {

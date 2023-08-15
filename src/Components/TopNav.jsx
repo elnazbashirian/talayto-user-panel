@@ -70,7 +70,7 @@ function TopNav({goldBalance, walletBalance, children}) {
                 </div>
             </div>
             <div className='sidebar-container'>
-                <div style={{display: isOpen ? "block" : "none"}} className="sidebar hide" ref={menuRef}>
+                <div  style={{display: isOpen ? 'block' : 'none'}} className="sidebar hide" ref={menuRef}>
                     <NavLink to='/' className='link' activeclassname="active">
                         <div className='icon'><FaHome/></div>
                         <div className="link_text">صفحه اصلی</div>
@@ -121,7 +121,7 @@ function TopNav({goldBalance, walletBalance, children}) {
                         <div className='icon'><FaShoppingBag/></div>
                         <div className="link_text">سفارشات من</div>
                     </NavLink>
-                    <NavLink to='/exit' className='link' activeclassname="active">
+                    <NavLink to='http://talayto.com' className='link' activeclassname="active">
                         <div className='icon'><FaPowerOff/></div>
                         <div className="link_text">خروج</div>
                     </NavLink>

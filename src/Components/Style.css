@@ -33,8 +33,8 @@ main {
     background: #1b1a1a;
     color: #fff;
     overflow: hidden;
-    transition: width .5s ease-in-out;
 }
+
 
 .top_section {
     display: flex;
@@ -114,7 +114,7 @@ main {
 
     .icon-bar {
         visibility: visible;
-        margin-right: .6em;
+        /*margin-right: .6em;*/
         font-size: 1.4rem;
         margin-top: .3em;
     }

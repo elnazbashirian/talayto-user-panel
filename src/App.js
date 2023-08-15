@@ -17,7 +17,6 @@ import Editprofile from "./Pages/Edit/editprofile";
 import Editaddress from "./Pages/Edit/editaddress";
 import Editpassword from "./Pages/Edit/editpassword";
 import OrderDetail from "./Pages/Orders/OrderDetail";
-import Exit from "./Pages/Exit";
 import './fonts/Estedad-Bold.woff2';
 import './fonts/Estedad-Light.woff2';
 import './fonts/Estedad-Medium.woff2';
@@ -47,7 +46,6 @@ function App() {
                     <Route path='/reception' element={<Reception/>}/>
                     <Route path='/order' element={<Orders/>}/>
                     <Route path="/order/:id" element={<OrderDetail/>}/>
-                    <Route path='/exit' element={<Exit/>}/>
                 </Routes>
             </div>
             <Sidebar/>

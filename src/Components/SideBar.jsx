@@ -11,13 +11,12 @@ import {
     FaInfo,
     FaIdBadge,
     FaHandHoldingUsd,
-    FaUserFriends,
-    FaPowerOff, FaArrowDown,FaShoppingBag
+    FaPowerOff,FaShoppingBag
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 
 function SideBar({children}) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const handleMouseEnter = () => {
         setIsOpen(true);
     };
@@ -46,8 +45,7 @@ function SideBar({children}) {
         }
     });
     return (
-        <div     onMouseEnter={handleMouseEnter}
-                 onMouseLeave={handleMouseLeave}>
+        <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <div style={{width: isOpen ? "250px" : "50px"}} className="sidebar hide" ref={menuRef}>
                 <div className="top_section">
                     <div style={{marginLeft: isOpen ? "50px" : "0px"}} className="bars">
@@ -104,7 +102,7 @@ function SideBar({children}) {
                     <div className='icon'><FaShoppingBag/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">سفارشات من</div>
                 </NavLink>
-                <NavLink to='/exit' className='link' activeclassname="active">
+                <NavLink to='http://talayto.com' className='link' activeclassname="active">
                     <div className='icon'><FaPowerOff/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">خروج</div>
                 </NavLink>

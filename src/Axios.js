@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'http://api.talayto.com/v1';
 
 axios.interceptors.request.use(function (config) {
     if (!localStorage.getItem("access-token")) {
-        localStorage.setItem("access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZDM0ZGM0YjZkMWQ4OTE0MDRhN2Q0MCIsImlhdCI6MTY5MTU2OTYzMSwiZXhwIjoxNjk1MTY5NjMxfQ.VAh0jPtWT0iV3_kltdY9H5qCpZ5g23TEwv1fsTn-c-Y")
+        window.location.href = "http://www.talayto.com/login";
     }
     config.headers['access-token'] = localStorage.getItem("access-token")
     config.headers['Content-Type'] = 'application/json'

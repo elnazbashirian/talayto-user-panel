@@ -22,7 +22,7 @@ function EditProfile(props) {
         try {
             await axios.post('/user/logout');
             localStorage.removeItem('access-token');
-            window.location.href = 'http://www.talayto.com';
+            window.location.href = 'http://www.talayto.com?loggedOut=true';
         } catch (error) {
             console.error('Logout error:', error);
         }

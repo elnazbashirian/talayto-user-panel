@@ -12,7 +12,7 @@ import {
     FaEdit,
     FaInfo,
     FaIdBadge,
-    FaHandHoldingUsd, FaPowerOff, FaShoppingBag,
+    FaHandHoldingUsd, FaPowerOff, FaShoppingBag, FaForward,
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 import SideBar from "./SideBar";
@@ -71,6 +71,10 @@ function TopNav({goldBalance, walletBalance, children}) {
             </div>
             <div className='sidebar-container'>
                 <div  style={{display: isOpen ? 'block' : 'none'}} className="sidebar hide" ref={menuRef}>
+                    <NavLink to='http://talayto.com?loggedOut=false' className='link' activeclassname="active">
+                        <div className='icon'><FaForward/></div>
+                        <div className="link_text">بازگشت به سایت اصلی</div>
+                    </NavLink>
                     <NavLink to='/' className='link' activeclassname="active">
                         <div className='icon'><FaHome/></div>
                         <div className="link_text">صفحه اصلی</div>
@@ -120,10 +124,6 @@ function TopNav({goldBalance, walletBalance, children}) {
                     <NavLink to='/order' className='link' activeclassname="active">
                         <div className='icon'><FaShoppingBag/></div>
                         <div className="link_text">سفارشات من</div>
-                    </NavLink>
-                    <NavLink to='http://talayto.com' className='link' activeclassname="active">
-                        <div className='icon'><FaPowerOff/></div>
-                        <div className="link_text">بازگشت به سایت اصلی</div>
                     </NavLink>
                 </div>
                 <main>{children}</main>

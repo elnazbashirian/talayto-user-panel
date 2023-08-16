@@ -53,7 +53,7 @@ function SideBar({children}) {
                         <FaBars onClick={toggle}/>
                     </div>
                 </div>
-                <NavLink to='http://talayto.com' className='link' activeclassname="active">
+                <NavLink to='http://talayto.com?loggedOut=false' className='link' activeclassname="active">
                     <div className='icon'><FaForward/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">بازگشت به فروشگاه</div>
                 </NavLink>

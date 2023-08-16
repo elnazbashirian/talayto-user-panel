@@ -44,10 +44,15 @@ function OrderDetail() {
                         <div className='order-code'> کد سفارش : {order.id} </div>
                         <div className='order-date'> تاریخ : {order.date} </div>
                     </div>
-                    <div>
+                    <div className='detail-data'>
                         {/*order.products[0].productDetails.thumbnailImage*/}
                         <img src={goldimg} alt={`Product`} />
+                        <div className='image-info'>
+                            <div className>نام محصول :{order.products[0].productDetails.title}</div>
+                            <div>نوع خرید :{order.type}</div>
+                        </div>
                     </div>
+
                 </div>
             ) : (
                 <div>Loading...</div>

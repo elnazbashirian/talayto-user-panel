@@ -106,7 +106,6 @@ main {
     color: white;
     visibility: hidden;
 }
-
 @media (max-width: 500px) {
     .hide {
         display: none;

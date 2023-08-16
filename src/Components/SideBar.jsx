@@ -11,6 +11,7 @@ import {
     FaInfo,
     FaIdBadge,
     FaHandHoldingUsd,
+    FaForward,
     FaPowerOff,FaShoppingBag
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
@@ -53,7 +54,7 @@ function SideBar({children}) {
                     </div>
                 </div>
                 <NavLink to='http://talayto.com' className='link' activeclassname="active">
-                    <div className='icon'><FaPowerOff/></div>
+                    <div className='icon'><FaForward/></div>
                     <div style={{display: isOpen ? "block" : "none"}} className="link_text">بازگشت به فروشگاه</div>
                 </NavLink>
                 <NavLink to='/' className='link' activeclassname="active">

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import TopNav from "../../Components/TopNav";
 import '../../Components/Styles/goldreport.css';
 import axios from "axios";
@@ -6,8 +6,8 @@ import ReactPaginate from 'react-paginate';
 
 function Goldreport(props) {
     const [goldTransaction, setGoldTransaction] = useState([]);
-    const [walletBalance,setWalletBalance] = useState([]);
-    const [goldBalance,setGoldBalance] = useState([]);
+    const [walletBalance, setWalletBalance] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
@@ -105,7 +105,7 @@ function Goldreport(props) {
                         nextLabel={'>'}
                         breakLabel={'...'}
                         breakClassName={'break-me'}
-                        pageCount={Math.ceil(totalPages/10)}
+                        pageCount={Math.ceil(totalPages / 10)}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={handlePageChange}

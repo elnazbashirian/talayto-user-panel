@@ -25,7 +25,6 @@ import './fonts/Estedad-Regular.woff2';
 
 function App() {
     return (
-
         <BrowserRouter>
             <div className='wrapper'>
                 <Routes>

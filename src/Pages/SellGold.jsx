@@ -6,6 +6,9 @@ import {ToastContainer} from "react-toastify";
 import TopNav from "../Components/TopNav";
 
 function SellGold(props) {
+    const [goldInput, setGoldInput] = useState('');
+    const [priceInput, setPriceInput] = useState('');
+    const [calculatedResult, setCalculatedResult] = useState('');
     const [paymentAmount, setPaymentAmount] = useState('');
     const [requestedGold, setRequestedGold] = useState('');
     const [selectedOption, setSelectedOption] = useState("price");
@@ -17,6 +20,21 @@ function SellGold(props) {
     const [goldBalance, setGoldBalance] = useState([]);
     const [walletBalance, setWalletBalance] = useState([]);
 
+    const calculateGoldAndPrice = (type, value) => {
+        axios.post('/user/computing', {
+            type,
+            value,
+        })
+            .then((response) => {
+                setCalculatedResult(response.data.result.toFixed(3));
+                if (type === 'sell-price') {
+                    setGoldInput(response.data.result.toFixed(3));
+                } else if (type === 'sell-weight') {
+                    setPriceInput(formatAmount(response.data.result * 1185600000));
+                }
+            })
+    };
+
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
@@ -27,6 +45,9 @@ function SellGold(props) {
     }, []);
 
     const formatAmount = (value) => {
+        if (!value || isNaN(value) || parseFloat(value) === 0) {
+            return "";
+        }
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
 
@@ -48,33 +69,63 @@ function SellGold(props) {
             })
     }, []);
 
-    const handlePaymentAmountChange = (event) => {
-        setPaymentAmount(event.target.value);
+    const handleRequestedGoldChange = (event) => {
+        const newGoldInput = event.target.value;
+        setGoldInput(newGoldInput);
+        const calculatedPrice = parseFloat(newGoldInput) * 23724000;
+        setPriceInput(formatAmount(calculatedPrice));
+        setCalculatedResult(newGoldInput);
     };
 
-    const handleRequestedGoldChange = (event) => {
-        setRequestedGold(event.target.value);
+    const handlePaymentAmountChange = (event) => {
+        const newPriceInput = event.target.value;
+        setPriceInput(newPriceInput);
+        const calculatedGold = parseFloat(newPriceInput) / 23724000;
+        setGoldInput(calculatedGold.toFixed(3));
+        setCalculatedResult(newPriceInput);
     };
 
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
+        setPaymentAmount('');
+        setRequestedGold('');
     };
+
+    const handleSellMaxBalance = () => {
+        // Set the gold input to the gold balance
+        setGoldInput(goldBalance);
+
+        // Calculate the money based on the gold balance and update the price input
+        const priceToReceive = goldBalance * sellQuotation;
+        setPriceInput(formatAmount(priceToReceive));
+
+        // Update the calculated result
+        setCalculatedResult(goldBalance);
+
+        // Update the gold balance to 0 and add the money to the wallet balance
+        setGoldBalance(0);
+        setWalletBalance((prevWalletBalance) => prevWalletBalance + priceToReceive);
+    };
+
 
     const handleSubmit = () => {
         const data = {
             type: selectedOption === "gold" ? "sell-weight" : "sell-price",
-            value: selectedOption === "gold" ? +requestedGold : +paymentAmount,
+            value: selectedOption === 'gold' ? parseFloat(goldInput) : parseFloat(priceInput.toString().replaceAll(',','')),
         };
+        console.log(data)
         axios.post('/user/sellGold', data)
             .then((response) => {
                 console.log('Response:', response);
-                Toast('خرید با موفقیت انجام شد', true)
+                Toast('فروش با موفقیت انجام شد', true)
             })
             .catch((error) => {
                 console.log('Error:', error);
                 Toast(error.response.data.message, false);
             });
     };
+
+
     return (
         <div className='main-container'>
             <ToastContainer/>
@@ -133,7 +184,7 @@ function SellGold(props) {
                         </div>
                         <input
                             type='text'
-                            value={paymentAmount}
+                            value={priceInput}
                             onChange={handlePaymentAmountChange}
                             disabled={selectedOption === 'gold'}
                         />
@@ -152,7 +203,7 @@ function SellGold(props) {
                         </div>
                         <input
                             type='text'
-                            value={requestedGold}
+                            value={goldInput}
                             onChange={handleRequestedGoldChange}
                             disabled={selectedOption === 'price'}
                         />
@@ -162,7 +213,7 @@ function SellGold(props) {
                 <div className='line'></div>
                 <div className='below-footer sell-footer'>
                     <button onClick={handleSubmit}>فروش</button>
-                    <button>فروش به اندازه کل موجودی</button>
+                    <button onClick={handleSellMaxBalance}>فروش به اندازه کل موجودی</button>
                 </div>
             </div>
         </div>

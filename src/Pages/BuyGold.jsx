@@ -90,12 +90,27 @@ function BuyGold(props) {
         setRequestedGold('');
     };
 
+    const handleBuyMaxBalance = () => {
+        const maxGoldWeightToBuy = walletBalance / buyQuotation;
+
+        setGoldInput(maxGoldWeightToBuy.toFixed(3));
+
+        const priceToPay = maxGoldWeightToBuy * buyQuotation;
+
+
+        setPriceInput(formatAmount(priceToPay-5000));
+        setCalculatedResult(maxGoldWeightToBuy.toFixed(3));
+
+        setWalletBalance(0);
+        setGoldBalance((prevGoldBalance) => prevGoldBalance + maxGoldWeightToBuy);
+
+    };
+
     const handleSubmit = () => {
         const data = {
             type: selectedOption === 'gold' ? 'buy-weight' : 'buy-price',
-            value: selectedOption === 'gold' ? parseFloat(goldInput) : parseFloat(priceInput),
+            value: selectedOption === 'gold' ? parseFloat(goldInput) : parseFloat(priceInput.toString().replaceAll(',','')),
         };
-
         axios.post('/user/buyGold', data)
             .then((response) => {
                 Toast('خرید با موفقیت انجام شد', true);
@@ -104,7 +119,6 @@ function BuyGold(props) {
                 Toast(error.response.data.message, false);
             });
     };
-
     return (
         <div className='main-container'>
             <ToastContainer/>
@@ -191,7 +205,7 @@ function BuyGold(props) {
                 <div className='line'></div>
                 <div className='below-footer buy-footer'>
                     <button onClick={handleSubmit}>خرید</button>
-                    <button>خرید به اندازه کل موجودی</button>
+                    <button onClick={handleBuyMaxBalance}>خرید به اندازه کل موجودی</button>
                 </div>
             </div>
         </div>

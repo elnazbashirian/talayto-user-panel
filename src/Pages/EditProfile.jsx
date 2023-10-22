@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import '../Components/Styles/editprofile.css';
 import TopNav from "../Components/TopNav";
-import {NavLink,Link,Outlet} from "react-router-dom";
+import {NavLink, Link, Outlet} from "react-router-dom";
 import axios from "axios";
 
 function EditProfile(props) {
-    const [walletBalance,setWalletBalance] = useState([]);
-    const [goldBalance,setGoldBalance] = useState([]);
+    const [walletBalance, setWalletBalance] = useState([]);
+    const [goldBalance, setGoldBalance] = useState([]);
     useEffect(() => {
         axios.get('/userInfo')
             .then(res => {
@@ -14,6 +14,7 @@ function EditProfile(props) {
                 setGoldBalance(res.data.goldBalance);
             })
     }, []);
+
     const formatAmount = (value) => {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };

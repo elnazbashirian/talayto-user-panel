@@ -8,8 +8,8 @@ function Editaddress(props) {
         province: '',
         city: '',
         address: '',
-        postalCode:'',
-        plaque:''
+        postalCode: '',
+        plaque: ''
     });
 
     useEffect(() => {
@@ -31,15 +31,15 @@ function Editaddress(props) {
     }, []);
 
     const handleInputChange = (event) => {
-        const { id, value } = event.target;
+        const {id, value} = event.target;
         setUserData((prevUserData) => ({
             ...prevUserData,
             [id]: value,
         }));
     };
     const handleFormSubmit = () => {
-        let data={
-            addresses:[{
+        let data = {
+            addresses: [{
                 province: userData.province,
                 city: userData.city,
                 address: userData.address,
@@ -52,11 +52,11 @@ function Editaddress(props) {
             .put('/userInfo', data)
             .then((response) => {
                 console.log('Profile edit successful:', response);
-                Toast('تغییرات اعمال شد',true);
+                Toast('تغییرات اعمال شد', true);
             })
             .catch((error) => {
                 console.log('Error editing profile:', error);
-                Toast("تغییرات امکان پذیر نیست",false);
+                Toast("تغییرات امکان پذیر نیست", false);
             });
     };
     return (
@@ -104,10 +104,6 @@ function Editaddress(props) {
                             onChange={handleInputChange}
                         />
                     </div>
-                    {/*<div className='form-group small'>*/}
-                    {/*    <div>واحد</div>*/}
-                    {/*    <input type='tel'/>*/}
-                    {/*</div>*/}
                     <div className='each-input-left'>
                         <div>کد پستی</div>
                         <input

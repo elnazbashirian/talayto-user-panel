@@ -3,7 +3,8 @@
     padding: 0;
     box-sizing: border-box;
 }
-.line{
+
+.line {
     border-bottom: 2px #333 solid;
 }
 
@@ -12,24 +13,28 @@ body {
     font-size: 1rem;
     color: white;
 }
-.charging-cart{
+
+.charging-cart {
     direction: rtl;
     background-color: #1b1a1a;
     width: 45%;
     border-radius: 0.428rem;
     margin: 2em auto;
 }
-.charging-header,.charging-body{
+
+.charging-header, .charging-body {
     padding: 1em;
 }
-.charging-header h3{
+
+.charging-header h3 {
     font-weight: 500;
 }
-.body-input{
+
+.body-input {
     display: flex;
 }
 
-.body-input input{
+.body-input input {
     width: 100%;
     padding: .5em;
     background-color: #1b1a1a;
@@ -38,7 +43,8 @@ body {
     border: 1px solid #373228;
     text-align: center;
 }
-.body-input button{
+
+.body-input button {
     outline: none;
     padding: .5em;
     font-size: 1rem;
@@ -55,15 +61,17 @@ body {
 
 }
 
-.body-buttons,.charging-button{
+.body-buttons, .charging-button {
     display: flex;
     justify-content: space-between;
     padding: .7em;
 }
-.charging-button{
+
+.charging-button {
     justify-content: flex-end;
 }
-.body-buttons button{
+
+.body-buttons button {
     width: 32%;
     background-color: rgba(55, 50, 40, 0.54);
     color: white;
@@ -73,7 +81,8 @@ body {
     border-radius: .4em;
     cursor: pointer;
 }
-.charging-button button{
+
+.charging-button button {
     outline: none;
     font-size: 1.1rem;
     background-color: rgba(174, 155, 122, 0.52);
@@ -89,6 +98,7 @@ body {
     border-radius: 8px;
     width: 158px;
 }
+
 .bubble-message {
     position: fixed;
     bottom: 30px;
@@ -100,22 +110,26 @@ body {
     border-radius: 8px;
     z-index: 999;
 }
-.charging-header{
+
+.charging-header {
     background-color: rgba(77, 69, 55, 0.72);
     color: rgba(255, 255, 255, 0.82);
     font-size: 14px;
 }
+
 @media (max-width: 768px) {
-    .body-buttons{
+    .body-buttons {
         flex-direction: column;
     }
-    .body-buttons button{
+
+    .body-buttons button {
         width: 100%;
     }
 
 }
+
 @media (max-width: 968px) {
-    .charging-cart{
+    .charging-cart {
         width: 100%;
     }
 }

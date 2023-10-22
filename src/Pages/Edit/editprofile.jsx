@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import Toast from "../../Toast";
 import {ToastContainer} from "react-toastify";
@@ -8,7 +8,7 @@ function Editprofile(props) {
         firstName: '',
         lastName: '',
         age: 0,
-        phoneNumber:''
+        phoneNumber: ''
     });
 
     useEffect(() => {
@@ -29,14 +29,14 @@ function Editprofile(props) {
     }, []);
 
     const handleInputChange = (event) => {
-        const { id, value } = event.target;
+        const {id, value} = event.target;
         setUserData((prevUserData) => ({
             ...prevUserData,
             [id]: value,
         }));
     };
     const handleFormSubmit = () => {
-        let data={
+        let data = {
             firstName: userData.firstName,
             lastName: userData.lastName,
             age: userData.age
@@ -45,11 +45,11 @@ function Editprofile(props) {
             .put('/userInfo', data)
             .then((response) => {
                 console.log('Profile edit successful:', response);
-                Toast('تغییرات اعمال شد',true);
+                Toast('تغییرات اعمال شد', true);
             })
             .catch((error) => {
                 console.log('Error editing profile:', error);
-                Toast("تغییرات امکان پذیر نیست",false);
+                Toast("تغییرات امکان پذیر نیست", false);
             });
     };
 
@@ -58,17 +58,6 @@ function Editprofile(props) {
             <ToastContainer/>
             <div className='edit-pro-header'><h3>ویرایش پروفایل</h3></div>
             <div className='line'></div>
-            {/*<div className='edit-pro-upload'>*/}
-            {/*    <a href="" className="edit-pro-img">*/}
-            {/*        <img src={profileimg} id="account-upload-img"*/}
-            {/*             alt="profile image" height="75" width="75"/>*/}
-            {/*    </a>*/}
-            {/*    <div>*/}
-            {/*        <label htmlFor='upload' className='upload-button'>بارگذاری</label>*/}
-            {/*        <input type="file" id="upload" className='hidden' accept="image/*" />*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            {/*<div className='line'></div>*/}
             <div className='edit-pro-body'>
                 <div className='edit-input'>
                     <div className='each-input-right'>

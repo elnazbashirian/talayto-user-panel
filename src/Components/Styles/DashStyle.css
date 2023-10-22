@@ -211,7 +211,7 @@ body {
 
 .number-table {
     padding: 1em;
-    margin-top: auto;
+    /*margin-top: auto;*/
     border-top: 2px #333 solid;
 }
 

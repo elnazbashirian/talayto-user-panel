@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './Style.css';
 import {
     FaBars,
@@ -12,7 +12,7 @@ import {
     FaIdBadge,
     FaHandHoldingUsd,
     FaForward,
-    FaPowerOff,FaShoppingBag
+    FaPowerOff, FaShoppingBag
 } from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 
@@ -30,19 +30,17 @@ function SideBar({children}) {
     };
     const [isShown, setIsShown] = useState(false)
     const shown = () => setIsShown(!isShown);
-    // const handleClick = event => {
-    //     setIsShown(current => !current);
-    // };
+
     let menuRef = useRef();
-    useEffect(()=>{
-        let handler = (e)=>{
-            if(!menuRef.current.contains(e.target)){
+    useEffect(() => {
+        let handler = (e) => {
+            if (!menuRef.current.contains(e.target)) {
                 setIsOpen(false);
             }
         }
-        document.addEventListener('mousedown',handler);
-        return()=>{
-            document.removeEventListener('mousedown',handler);
+        document.addEventListener('mousedown', handler);
+        return () => {
+            document.removeEventListener('mousedown', handler);
         }
     });
     return (

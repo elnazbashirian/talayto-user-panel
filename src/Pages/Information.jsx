@@ -35,7 +35,7 @@ function Information(props) {
                         </thead>
                         <tbody>
                         <tr>
-                            <td colSpan='5'>هیچ دیتایی در دسترس نیست</td>
+                            <td colSpan='5'>اطلاعاتی موجود نیست</td>
                         </tr>
                         </tbody>
                     </table>

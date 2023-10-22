@@ -1,12 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../../Components/Styles/DashStyle.css';
 import {
-    FaUser,
-    FaPlusCircle,
-    FaArrowUp,
-    FaArrowDown,
-    FaCoins,
-    FaCashRegister,
+    FaUser, FaPlusCircle, FaArrowUp, FaArrowDown, FaCoins, FaCashRegister,
 } from "react-icons/fa";
 import boxoneimg from '../Images/boxoneimg.png';
 import boxtwoimg from '../Images/boxtwoimg.png';
@@ -47,7 +42,6 @@ function Dashboard(props) {
     const handlePageChange = ({selected}) => {
         setCurrentPage(selected);
     };
-
 
     useEffect(() => {
         axios
@@ -103,8 +97,7 @@ function Dashboard(props) {
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentTransactions = filteredGoldTransaction.slice(startIndex, endIndex);
-    return (
-        <div className='main-container res-main-container'>
+    return (<div className='main-container res-main-container'>
             <TopNav walletBalance={formatAmount(walletBalance)} goldBalance={formatAmount(goldBalance)}/>
             <div className='card-container'>
                 <div className='left-card'>
@@ -182,17 +175,14 @@ function Dashboard(props) {
                 <CChart
                     type="line"
                     data={{
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: "My First dataset",
-                                backgroundColor: "#fff",
-                                borderColor: "#95856A",
-                                pointBackgroundColor: "rgba(220, 220, 220, 1)",
-                                pointBorderColor: "#fff",
-                                data: data,
-                            }
-                        ],
+                        labels: labels, datasets: [{
+                            label: "My First dataset",
+                            backgroundColor: "#fff",
+                            borderColor: "#95856A",
+                            pointBackgroundColor: "rgba(220, 220, 220, 1)",
+                            pointBorderColor: "#fff",
+                            data: data,
+                        }],
                     }}
                 />
             </div>
@@ -220,11 +210,7 @@ function Dashboard(props) {
                             </thead>
                             <tbody>
                             <tr>
-                                <td>الناز بشیریان</td>
-                                <td>5.000.000 ریال</td>
-                                <td></td>
-                                <td>ناموفق</td>
-                                <td>وندار</td>
+                                <td>اطلاعاتی موجود نیست</td>
                             </tr>
                             </tbody>
                         </table>
@@ -255,8 +241,7 @@ function Dashboard(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {currentTransactions.length > 0 ? (
-                                currentTransactions.map((transaction) => (
+                            {currentTransactions.length > 0 ? (currentTransactions.map((transaction) => (
                                     <tr key={transaction.id}>
                                         <td>{transaction.date}</td>
                                         <td>{transaction.trackingCode}</td>
@@ -264,13 +249,9 @@ function Dashboard(props) {
                                         <td>{transaction.transactionType}</td>
                                         <td>{formatAmount(transaction.price)} ریال</td>
                                         <td>{transaction.status}</td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
+                                    </tr>))) : (<tr>
                                     <td colSpan='5'>اطلاعاتی موجود نیست</td>
-                                </tr>
-                            )}
+                                </tr>)}
                             </tbody>
                         </table>
                     </div>

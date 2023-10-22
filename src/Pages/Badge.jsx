@@ -3,6 +3,7 @@ import TopNav from "../Components/TopNav";
 import '../Components/Styles/badge.css';
 import {FaUser} from "react-icons/fa";
 import axios from "axios";
+
 function Badge(props) {
     const [walletBalance, setWalletBalance] = useState([]);
     const [goldBalance, setGoldBalance] = useState([]);
@@ -24,8 +25,12 @@ function Badge(props) {
                 <div className='line'></div>
                 <div className='badge-body'>
                     <div>لطفا برای استفاده از امکانات سامانه نسبت به تکمیل حساب کاربری خود اقدام نمایید</div>
-                    <div><button className='user-button'>تکمیل اطلاعات حساب کاربری</button></div>
-                    <div className='call-button'><button>برای تماس با پشتیبانی کلیک کنید</button></div>
+                    <div>
+                        <button className='user-button'>تکمیل اطلاعات حساب کاربری</button>
+                    </div>
+                    <div className='call-button'>
+                        <button>برای تماس با پشتیبانی کلیک کنید</button>
+                    </div>
                 </div>
             </div>
         </div>

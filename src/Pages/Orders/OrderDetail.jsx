@@ -46,7 +46,7 @@ function OrderDetail() {
                     </div>
                     <div className='detail-data'>
                         {/*order.products[0].productDetails.thumbnailImage*/}
-                        <img src={goldimg} alt={`Product`} />
+                        <img src={goldimg} alt={`Product`}/>
                         <div className='image-info'>
                             <div className>نام محصول :{order.products[0].productDetails.title}</div>
                             <div>نوع خرید :{order.type}</div>

@@ -80,10 +80,12 @@ input[type=checkbox] {
     justify-content: space-evenly;
     width: 31%;
 }
-.check-box{
+
+.check-box {
     display: inline-flex;
 }
-.check-box span{
+
+.check-box span {
     margin-right: .5em;
 }
 
